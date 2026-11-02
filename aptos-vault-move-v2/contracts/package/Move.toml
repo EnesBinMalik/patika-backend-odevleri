@@ -1,0 +1,13 @@
+[package]
+name = "AptosVault"
+version = "2.0.0"
+authors = ["Enes Öztürk <enesbino38@gmail.com>"]
+
+[addresses]
+vault_addr = "0x89e24b759d6411b0e352f20a9a814149fa5eb88863f6959ba08b35f29918d361"
+admin = "0xca5f1897c8d32b56e409391b48d641b65e71881822b3f17c8f25875965416209"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"

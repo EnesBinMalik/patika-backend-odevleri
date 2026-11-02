@@ -1,0 +1,5 @@
+{
+  "name": "Aptos Vault Move v2 - Doğrudan Kasa Adresi Mimarisi & Test Portalı",
+  "description": "Aptos Move Vault akıllı sözleşmesinin doğrudan kasa adresi (vault_address) ile optimize edilmiş mimarisi, interaktif simülatörü, birim testleri, dağıtım rehberi ve teknik teslim raporu. Hazırlayan: Enes Öztürk.",
+  "requestFramePermissions": []
+}

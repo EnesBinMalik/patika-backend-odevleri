@@ -1,0 +1,23 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Yerel ortam dosyaları (bu proje hiçbir env değişkeni okumuyor)
+.env
+.env.local
+.env.*.local
+
+# Editör / işletim sistemi
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+
+# Aptos derleme artıkları
+build/
+aptosCLI/

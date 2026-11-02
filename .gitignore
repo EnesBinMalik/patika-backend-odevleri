@@ -32,3 +32,9 @@ desktop.ini
 .env
 .env.*
 *.pem
+
+# Oturum artıkları: bu klasörler bu depoya ait değil
+/visualizations/
+/_zipscan/
+# patika-dev-odevler arşivinin ayrı klonu (iç içe depo olarak versiyonlanmaz)
+/dev-odevler/
