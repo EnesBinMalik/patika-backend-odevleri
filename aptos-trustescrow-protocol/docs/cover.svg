@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-labelledby="t d">
+  <title id="t">Aptos TrustEscrow Protocol - Milestone Tabanli Merkeziyetsiz Emanet</title>
+  <desc id="d">Kapak gorseli: solda proje basi ve dogrulanmis istatistik kartlari, sagda emanet kasasi yasam dongusu semasi (create, submit, approve, dispute, resolve) ve zincir ustu para akisi.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#060d18"/>
+      <stop offset="0.5" stop-color="#0b1224"/>
+      <stop offset="1" stop-color="#08170f"/>
+    </linearGradient>
+    <radialGradient id="glowTeal" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.055"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#94a3b8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowTeal" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arrowRose" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#fb7185"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <circle cx="1160" cy="80" r="300" fill="url(#glowTeal)"/>
+  <circle cx="130" cy="610" r="270" fill="url(#glowCyan)"/>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace">
+    <text x="72" y="84" font-size="15" fill="#2dd4bf" letter-spacing="4">PATIKA · BACKEND ODEVI</text>
+    <text x="72" y="110" font-size="14" fill="#64748b" letter-spacing="1">MOVE 2 / APTOS FRAMEWORK / EMANET + TAHKIM PROTOKOLU</text>
+  </g>
+
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="72" y="184" font-size="48" font-weight="700" fill="#f8fafc">Aptos TrustEscrow</text>
+    <text x="72" y="228" font-size="34" font-weight="700" fill="url(#accent)">Protocol</text>
+    <text x="72" y="266" font-size="19" fill="#cbd5e1">Kilometre tasi tabanli merkeziyetsiz emanet kasasi</text>
+    <text x="72" y="292" font-size="16" fill="#7c8ba1">AptosCoin kaynagi kilitli · hakem ikiye bolur · 7 entry + 2 view</text>
+  </g>
+
+  <rect x="72" y="312" width="452" height="1" fill="url(#accent)" opacity="0.5"/>
+
+  <g>
+    <g transform="translate(72,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#2dd4bf" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#2dd4bf">600</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">satir Move</text>
+    </g>
+    <g transform="translate(188,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#38bdf8">9</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">hata kodu</text>
+    </g>
+    <g transform="translate(304,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.32"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#a3e635">26</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">assert!</text>
+    </g>
+    <g transform="translate(420,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#fbbf24">2</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">Move testi</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#64748b">
+    <text x="72" y="446">escrow_vault 488 satir · reputation_registry 112 satir</text>
+    <text x="72" y="468">tests 163 satir · Move.toml 12 satir (AptosFramework)</text>
+  </g>
+
+  <rect x="72" y="492" width="452" height="104" rx="12" fill="#0f172a" stroke="#fb7185" stroke-opacity="0.45"/>
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="92" y="520" font-size="14" font-weight="700" fill="#fb7185">ARAYUZ NOTU</text>
+    <text x="92" y="546" font-size="13" fill="#cbd5e1">Arayuz bir simulasyondur: React durumu yazar,</text>
+    <text x="92" y="566" font-size="13" fill="#cbd5e1">zincire islem gondermez. Yalniz musluk + bakiye</text>
+    <text x="92" y="586" font-size="13" fill="#cbd5e1">okumasi gercek fullnode'a gider.</text>
+  </g>
+
+  <g>
+    <text x="600" y="120" font-family="Consolas, monospace" font-size="14" fill="#94a3b8" letter-spacing="2">ESCROW VAULT LIVE CYCLE</text>
+
+    <rect x="600" y="140" width="200" height="72" rx="12" fill="url(#card)" stroke="#2dd4bf" stroke-opacity="0.5"/>
+    <text x="700" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">create_escrow</text>
+    <text x="700" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#5eead4">Coin&lt;AptosCoin&gt; kilitlenir</text>
+
+    <rect x="872" y="140" width="200" height="72" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="972" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">submit_milestone</text>
+    <text x="972" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">proof_uri + zaman damgasi</text>
+
+    <path d="M800 176H864" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+    <rect x="872" y="266" width="200" height="72" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.5"/>
+    <text x="972" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">approve_milestone</text>
+    <text x="972" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#bef264">coin::extract + deposit</text>
+
+    <path d="M972 212V258" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+    <rect x="600" y="266" width="200" height="72" rx="12" fill="url(#card)" stroke="#34d399" stroke-opacity="0.5"/>
+    <text x="700" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">STATUS_COMPLETED</text>
+    <text x="700" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#6ee7b7">status == 4</text>
+
+    <path d="M864 302H808" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowTeal)"/>
+
+    <rect x="600" y="404" width="200" height="72" rx="12" fill="url(#card)" stroke="#fb7185" stroke-opacity="0.55"/>
+    <text x="700" y="434" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">raise_dispute</text>
+    <text x="700" y="456" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fda4af">taraflardan biri · status 3</text>
+
+    <path d="M700 338V396" stroke="#fb7185" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowRose)"/>
+
+    <rect x="872" y="404" width="200" height="72" rx="12" fill="url(#card)" stroke="#fb7185" stroke-opacity="0.55"/>
+    <text x="972" y="434" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">resolve_dispute</text>
+    <text x="972" y="456" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fda4af">E_INVALID_SPLIT: toplam == kalan</text>
+
+    <path d="M800 440H864" stroke="#fb7185" stroke-width="2" marker-end="url(#arrowRose)"/>
+
+    <rect x="600" y="518" width="472" height="58" rx="12" fill="#0f172a" stroke="#2dd4bf" stroke-opacity="0.35"/>
+    <text x="836" y="543" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#5eead4">struct EscrowVault has key { locked_funds: Coin&lt;AptosCoin&gt;, ... }</text>
+    <text x="836" y="563" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#94a3b8">move_to(client_signer, vault) → musteri basina tek kasa</text>
+
+    <g font-family="Consolas, monospace" font-size="12" fill="#475569">
+      <text x="1100" y="180">7 entry fun</text>
+      <text x="1100" y="202">2 #[view]</text>
+      <text x="1100" y="224">5 STATUS_*</text>
+      <text x="1100" y="246">5 MILESTONE_*</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#475569">
+    <text x="72" y="620">Enes Ozturk · patika-backend-odevleri/aptos-trustescrow-protocol</text>
+    <text x="1208" y="620" text-anchor="end">derlenmemis kaynak · derleme/uyelme izi yok</text>
+  </g>
+</svg>

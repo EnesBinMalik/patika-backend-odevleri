@@ -5,7 +5,7 @@
 [Patika](https://patika.dev) backend yolculuğundaki ödev ve projelerin **depo kökü**.
 Her ödev kendi klasöründe; blokzincir, GraphQL, Node ve mimari refaktör işleri burada toplanır.
 
-[![Ödev](https://img.shields.io/badge/ödev-1-22D3EE?style=flat-square)](#içerik)
+[![Ödev](https://img.shields.io/badge/ödev-2-22D3EE?style=flat-square)](#içerik)
 [![Diller](https://img.shields.io/badge/Move_2_+_TypeScript-A78BFA?style=flat-square)](#içerik)
 [![Özel görsel](https://img.shields.io/badge/her_ödev-özel_kapak-FBBF24?style=flat-square)](#görsel-standartları)
 [![Durum](https://img.shields.io/badge/yerel-onay_bekleniyor-64748B?style=flat-square)](#nasıl-okunur)
@@ -19,6 +19,7 @@ Her ödev kendi klasöründe; blokzincir, GraphQL, Node ve mimari refaktör işl
 | # | Ders / Teknoloji | Ödev | Ne içeriyor | Durum |
 |---|---|---|---|---|
 | 1 | **Aptos · Move 2** | [Aptos Vault Move v2 — Doğrudan Kasa Adresi Mimarisi & Test Portalı](aptos-vault-move-v2/README.md) | `vault_address` refaktörü, 311 satır sözleşme, 6 birim test, `transfer_admin` bonusu, React 19 portalı ve üretilmiş gerçek Move paketi | ✅ tamamlandı · ⚠️ gaz/devnet iddiaları [§11](aptos-vault-move-v2/README.md#11-dürüstlük-rehberi-kod-mu-vitrin-mi)'de dürüstçe sınırlanmıştır |
+| 2 | **Aptos · Move 2 + React 19** | [Aptos TrustEscrow Protocol — Kilometre Taşı Tabanlı Emanet & Hakem Tahkimi](aptos-trustescrow-protocol/README.md) | 600 satır Move (488 + 112), 7 `entry fun` + 2 `#[view]`, `Coin<AptosCoin>` kaynağı ile kilitleme, 9 hata kodu, 12 `assert!` ile 2 birim test, 5 sekmeli simülasyon paneli | ✅ teslim · ⚠️ derlenmemiş kaynak, dağıtım/cüzdan iddiaları ve 14 sözleşme kusuru [§8](aptos-trustescrow-protocol/README.md#8-dürüstlük-rehberi-sözleşmede-kalan-kusurlar)–[§9](aptos-trustescrow-protocol/README.md#9-doğrulanamayan-iddialar-orijinal-arşivden-çıkarıldı)'da |
 
 ## Klasör yapısı
 
@@ -32,6 +33,14 @@ patika-backend-odevleri/
 │   ├── docs/cover.svg      ← ödevin özel kapağı (elle yazılmış vektör)
 │   ├── src/                ← 5 sekmeli inceleme portalı (React 19 + Vite 8 + Tailwind 4)
 │   └── README.md           ← ödevin tam belgesi
+├── aptos-trustescrow-protocol/
+│   ├── contracts/
+│   │   ├── Move.toml       ← tek bağımlılık: AptosFramework
+│   │   ├── sources/        ← escrow_vault (488) + reputation_registry (112)
+│   │   └── tests/          ← trust_escrow_tests.move (2 test, 12 assert)
+│   ├── docs/cover.svg      ← ödevin özel kapağı (elle yazılmış vektör)
+│   ├── src/                ← 5 sekmeli emanet operatörü (yaşam döngüsü yerel simülasyondur)
+│   └── README.md           ← §8'de 14 sözleşme kusuru, §9'da arşivden silinen iddialar
 └── README.md               ← bu dosya (depo kökü indeksi)
 ```
 

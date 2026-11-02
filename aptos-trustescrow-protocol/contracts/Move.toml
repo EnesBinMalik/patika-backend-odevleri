@@ -1,0 +1,12 @@
+[package]
+name = "TrustEscrow"
+version = "1.0.0"
+authors = ["Enes Öztürk <enesbino38@gmail.com>"]
+
+[addresses]
+trust_escrow = "0x9f4a8b7c2518e3d647a508b9c6f2e8d3b57a1e0c4f839a672e519bd746203c15"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"

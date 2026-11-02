@@ -36,5 +36,6 @@ desktop.ini
 # Oturum artıkları: bu klasörler bu depoya ait değil
 /visualizations/
 /_zipscan/
+/_zipscan2/
 # patika-dev-odevler arşivinin ayrı klonu (iç içe depo olarak versiyonlanmaz)
 /dev-odevler/

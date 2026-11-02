@@ -1,0 +1,4 @@
+{
+  "name": "Aptos TrustEscrow Protocol - Enes Öztürk",
+  "description": "Aptos Move akıllı sözleşmesi ve merkeziyetsiz emanet protokolü: Kilometre taşı tabanlı fonlama, hakem tahkimi ve güvenli ödemeler. Arayüz, sözleşmeyi çalıştırmaz; Move kaynaklarını gösterir ve emanet yaşam döngüsünü istemci tarafında simüle eder."
+}
