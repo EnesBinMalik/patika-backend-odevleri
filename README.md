@@ -9,9 +9,23 @@ mühendisliği çıktıları da — burada toplanır.
 [![Ödev](https://img.shields.io/badge/ödev-4-22D3EE?style=flat-square)](#içerik)
 [![Diller](https://img.shields.io/badge/Move_2·TypeScript·HTML/CSS-A78BFA?style=flat-square)](#içerik)
 [![Özel görsel](https://img.shields.io/badge/her_ödev-özel_kapak-FBBF24?style=flat-square)](#görsel-standartları)
-[![Durum](https://img.shields.io/badge/yerel-onay_bekleniyor-64748B?style=flat-square)](#nasıl-okunur)
+[![Durum](https://img.shields.io/badge/durum-4/4_teslim-34D399?style=flat-square)](#içerik)
+[![İmza](https://img.shields.io/badge/Enes_Öztürk-telif_bende-FF0055?style=flat-square)](#imza-ve-haklar)
 
 </div>
+
+---
+
+## Kapak galerisi
+
+Her ödevin kapağı **elle yazılmış SVG vektördür** (`<ödev>/docs/cover.svg`) ve üzerindeki her sayı
+kaynak koddan doğrulanır — jenerik görsel kullanılmaz.
+
+| [**1 · Aptos Vault Move v2**](aptos-vault-move-v2/README.md) | [**2 · Aptos TrustEscrow**](aptos-trustescrow-protocol/README.md) |
+|:---:|:---:|
+| <img src="aptos-vault-move-v2/docs/cover.svg" width="620" alt="Aptos Vault Move v2 kapağı: 311 satır sözleşme, 6 birim test, kasa adresi mimarisi" /> | <img src="aptos-trustescrow-protocol/docs/cover.svg" width="620" alt="Aptos TrustEscrow kapağı: 600 satır Move, 9 hata kodu, emanet yaşam döngüsü şeması" /> |
+| [**3 · AuraSync — Mobile Cyber-Glass OS**](aurasync/README.md) | [**4 · NexusCore — Quantum Terminal**](nexuscore/README.md) |
+| <img src="aurasync/docs/cover.svg" width="620" alt="AuraSync kapağı: 2.687 satır src, 10 terminal komutu, tarayıcı API → widget haritası, gerçek/simülasyon sınırı" /> | <img src="nexuscore/docs/cover.svg" width="620" alt="NexusCore kapağı: 2.483 satır tek dosya, 11 CLI komutu, 51 id, 8 kurgusal düğüm, veri kaynağı → etiket zinciri" /> |
 
 ---
 
@@ -77,6 +91,17 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
   görseli kullanılmaz. Kapak, o ödevin gerçek sayılarını (dosya/satır/test/adres sayısı) taşır.
 - Kapaktaki her sayı kaynak koddan doğrulanır; sayı değişirse kapak da güncellenir.
 - Depo köküne sosyal önizleme gerekiyorsa Settings → Social preview ile verilir.
+
+## İmza ve haklar
+
+- Depodaki dört çalışmanın **tasarımı ve kodu Enes Öztürk'e aittir**; katkı hakları (telif) saklıdır.
+- Beyan her ödevin içinde de görünür: ödev README'sinin başlığı, `docs/cover.svg` altbilgisi ve
+  arayüzün kendi künyesi (AuraSync `about` komutu + Architect HUD, NexusCore altbilgi + `SYSTEM SPECS`).
+- Kaynak dosyalar `SPDX-License-Identifier: Apache-2.0` başlığıyla dağıtılır; depo kök lisans dosyası
+  ayrıca eklenene kadar bu beyan geçerlidir.
+- Üçüncü taraf varlıklar kaynak gösterilir: Google Fonts yazı tipleri, React 19 / Vite 8 / Tailwind 4 /
+  lucide-react, Aptos Framework (Move). Bu depoda **başkasına ait kod "benim" diye sunulmaz**;
+  simülasyon olan hiçbir şey "gerçek ölçüm" diye de sunulmaz.
 
 ## Notlar
 
