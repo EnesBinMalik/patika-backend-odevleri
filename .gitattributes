@@ -1,0 +1,27 @@
+# Depodaki tüm metin dosyalari LF ile saklanir ve LF ile kontrol edilir.
+# Amac: README'lerdeki satir/karakter olcumleri Windows klonunda da ayni kalsin
+# (core.autocrlf=true iken CRLF'e cevirip sayilari kaydirmasin).
+* text=auto eol=lf
+
+# Ikili varliklar: icerigi asla donusturulmez
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.zip binary
+*.pdf binary
+
+# Döküman ve veri dosyaları metindir
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.svg text eol=lf
+*.move text eol=lf
+*.graphql text eol=lf

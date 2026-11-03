@@ -1,0 +1,36 @@
+patika-backend-odevleri
+Copyright 2026 Enes Öztürk
+
+Bu depodaki tasarım ve kod Enes Öztürk'e aittir ve Apache License, Version 2.0
+(ek'te: LICENSE) altında dağıtılır. Elle yazılmış kaynak dosyaların başlıklarında
+SPDX-License-Identifier: Apache-2.0 beyanı bulunur; ölçülen durum:
+
+    kaynak dosya (ts|tsx|js|jsx|mjs|rs|java|graphql|move|html|css|py): 58
+    beyanı taşıyan dosya:                                              17
+
+Beyan bulunmayan dosyalar da LICENSE ve bu NOTICE ile aynı lisansa tabidir.
+Sayı değişirse bu bloğu aynı komutla yeniden ölçüp güncelleyin:
+
+    git -c core.quotepath=false ls-files | grep -E '\.(ts|tsx|js|jsx|mjs|rs|java|graphql|move|html|css|py)$' > /tmp/s.txt
+    wc -l < /tmp/s.txt                        # 1. sayı: toplam kaynak dosya
+    while IFS= read -r f; do grep -q "SPDX-License-Identifier: Apache-2.0" "$f" && echo "$f"; done < /tmp/s.txt | wc -l
+
+Üçüncü taraf ve türetilmiş varlıklar
+-------------------------------------
+- Google Fonts (fonts.googleapis.com / fonts.gstatic.com): arayüzler çalışma
+  zamanında Google'ın CDN'inden font çeker; font dosyaları bu depoya
+  kopyalanmamıştır. Her fontun kendi lisansı (SIL OFL) Google'ın sayfasındadır.
+- package.json / Cargo.lock / Move.toml ile gelen npm ve crates bağımlılıkları
+  kendi lisanslarıyla dağıtılır; bu depo onları içermez.
+- aptos-trustescrow-protocol/src/assets/images/*.jpg: bu ödev için üretilmiş
+  sentetik (AI) görsellerdir; gerçek bir kişiyi, markayı veya ürünü temsil etmez.
+- docs/cover.svg dosyaları: her ödevin sayılarını kaynak koddan alan, elle
+  yazılmış vektör kapaklardır; jenerik stok görsel kullanılmamıştır.
+
+Tescil beyanı (attribution)
+---------------------------
+Bu yazılımı kullanan dağıtımlar, telif sahibini "Enes Öztürk" olarak ve
+depo adresini https://github.com/EnesBinMalik/patika-backend-odevleri olarak
+belirtmelidir. Başkasına ait kod bu depoda "bizim" diye sunulmaz; üst satırlarda
+kaynağı açıkça ayrılan üçüncü taraf parçalar dışında tüm kod bu ödevler için
+yazılmıştır.
