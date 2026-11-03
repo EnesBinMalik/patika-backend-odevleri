@@ -333,7 +333,7 @@ sadece sayısal büyüklüğü burada ölçülmemiştir.
 | Paket | `contracts/package/Move.toml` — `name = "AptosVault"`, `version = "2.0.0"` |
 | Portal | React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · lucide-react |
 | Doğrulama | 6 Move birim testi, 2 `#[expected_failure]` olumsuz yol |
-| Lisans | Apache-2.0 (kaynak başlıklarında `SPDX-License-Identifier`) |
+| Lisans | Apache-2.0 — kök `LICENSE` + `NOTICE`; bu ödevde 17 kaynak dosyanın 1'i (`src/App.tsx`) başlığında `SPDX-License-Identifier` taşıyor |
 
 ## 13. Bilinen sınırlar
 

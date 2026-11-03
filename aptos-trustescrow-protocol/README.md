@@ -281,8 +281,10 @@ kalıpları) bu projede **sıfır eşleşme** verdi. Tek kişisel veri, gelişti
 3. **İtibar modülü fiilen devre dışı** (§8/10-14): ne yetki ne escrow bağlantısı ne test var.
 4. **Arayüz kalıcılığı:** yalnızca `wallet` localStorage'da (`aptos_trustescrow_wallet`); emanetler
    sayfa yenilenince tohum verisine döner.
-5. **`LICENSE` dosyası yok.** Arşivde lisans beyanı bulunmadığı için hiçbir şey eklenmedi; ticari/akademik
-   kullanımda önce sorulmalı.
+5. **Bu ödevin kendi kaynak dosyalarında lisans başlığı yok** (ölçüm: 21 dosyanın 0'ında
+   `SPDX-License-Identifier`). Depo kökünde artık `LICENSE` (Apache-2.0) ve `NOTICE` durduğu için
+   hukuki çerçeve kökten geliyor; ama zip'ten gelen bu klasördeki dosyalara başlık eklenmedi ve
+   eklenene kadar ticari/akademik kullanımda ayrıca sormak iyi niyet göstergesidir.
 6. Görseller AI Studio çıktısı demo varlıklarıdır (4 JPG, ~2.8 MB) ve gerçek bir ürün ekranı değildir.
 
 ---
