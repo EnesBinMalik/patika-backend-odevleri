@@ -1,0 +1,5 @@
+{
+  "name": "NexusCore // AI Quantum Terminal & Threat Visualizer",
+  "description": "Enes Öztürk imzalı cyber-glassmorphic arayüz demosu: Canvas 2D tehdit radarı, termal model kaydırıcıları, Web Audio ses sentezi ve tek dosyalık CLI. Gösterilen tehdit/metrik verileri simülasyondur; gerçek izleme yapılmaz, sunucuya veri gönderilmez.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,2482 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>NexusCore // AI Quantum Terminal &amp; Threat Visualizer</title>
+    <meta name="description" content="NexusCore — Enes Öztürk imzalı cyber-glassmorphic terminal demosu: sentezlenmiş tehdit radarı, yapay sinir ağı ağırlık grafiği ve dekoratif telemetri. Veriler simülasyondur, gerçek izleme yapılmaz. Etkileşimli CLI, Web Audio ses sentezi, Canvas radar." />
+    <meta property="og:title" content="NexusCore // AI Quantum Terminal &amp; Threat Visualizer" />
+    <meta property="og:description" content="Enes Öztürk imzalı cyberpunk terminal arayüzü: canvas radar, Web Audio sesleri, CLI konsolu. Gösterilen tehdit/ağ verileri üretilmiş simülasyondur." />
+    <meta property="og:type" content="website" />
+    <meta name="author" content="Enes Öztürk" />
+    <meta name="rights" content="© 2026 Enes Öztürk — tüm hakları saklıdır" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts for futuristic monospace & display telemetry -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Orbitron:wght@500;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      /* ==========================================================================
+         NEXUSCORE DESIGN SYSTEM & CYBER-GLASSMORPHISM
+         Architected & Designed by Enes Öztürk // NexusCore v4.0
+         ========================================================================== */
+      :root {
+        --bg-void: #020205;
+        --bg-glass: rgba(6, 10, 24, 0.76);
+        --border-glass: rgba(0, 243, 255, 0.18);
+        --border-glass-hover: rgba(0, 243, 255, 0.5);
+        
+        --cyan-neon: #00f3ff;
+        --cyan-glow: rgba(0, 243, 255, 0.4);
+        --amber-warning: #ffb700;
+        --amber-glow: rgba(255, 183, 0, 0.4);
+        --purple-neural: #b000ff;
+        --purple-glow: rgba(176, 0, 255, 0.4);
+        --crimson-breach: #ff0055;
+        --crimson-glow: rgba(255, 0, 85, 0.45);
+        --emerald-sync: #00ff88;
+        --emerald-glow: rgba(0, 255, 136, 0.4);
+
+        --text-primary: #e6f1ff;
+        --text-secondary: #879cb8;
+        --text-muted: #516480;
+
+        --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        --font-display: 'Orbitron', 'Plus Jakarta Sans', system-ui, sans-serif;
+        --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+        --radius-panel: 12px;
+        --radius-sm: 6px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background-color: var(--bg-void);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.5;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Deep Cyber Background Grid & Ambient Glow */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: 
+          radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.09) 0%, transparent 60%),
+          radial-gradient(circle at 92% 75%, rgba(176, 0, 255, 0.08) 0%, transparent 50%),
+          radial-gradient(circle at 8% 85%, rgba(255, 183, 0, 0.06) 0%, transparent 45%),
+          linear-gradient(rgba(0, 243, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 243, 255, 0.035) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+        background-position: center top, center, center, center, center;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Scanlines CRT Grid Effect (Toggleable) */
+      .scanlines-overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0) 50%,
+          rgba(0, 0, 0, 0.35) 50%,
+          rgba(0, 0, 0, 0.35)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.55;
+        transition: opacity 0.3s ease;
+      }
+      .scanlines-overlay.disabled {
+        opacity: 0;
+      }
+
+      /* Layout Wrapper */
+      .nexus-container {
+        position: relative;
+        z-index: 10;
+        max-width: 1680px;
+        margin: 0 auto;
+        padding: 16px 18px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      @media (min-width: 1024px) {
+        .nexus-container {
+          padding: 22px 32px 50px;
+          gap: 24px;
+        }
+      }
+
+      /* Glass Panel Master Component */
+      .cyber-panel {
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-glass);
+        border-radius: var(--radius-panel);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(0, 243, 255, 0.06) inset;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .cyber-panel:hover {
+        border-color: var(--border-glass-hover);
+        box-shadow: 0 14px 40px -8px rgba(0, 0, 0, 0.9), 0 0 18px rgba(0, 243, 255, 0.1);
+      }
+
+      /* Cyber Corner Accents */
+      .cyber-panel::before,
+      .cyber-panel::after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        pointer-events: none;
+      }
+      .cyber-panel::before {
+        top: 0;
+        left: 0;
+        border-top: 2px solid var(--cyan-neon);
+        border-left: 2px solid var(--cyan-neon);
+      }
+      .cyber-panel::after {
+        bottom: 0;
+        right: 0;
+        border-bottom: 2px solid var(--cyan-neon);
+        border-right: 2px solid var(--cyan-neon);
+      }
+
+      /* Header Styling */
+      .nexus-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 24px;
+        background: rgba(4, 7, 18, 0.88);
+      }
+
+      .brand-block {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-icon-hex {
+        width: 44px;
+        height: 44px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle, rgba(0, 243, 255, 0.25) 0%, rgba(176, 0, 255, 0.12) 70%, transparent 100%);
+        border: 1px solid var(--cyan-neon);
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+        box-shadow: 0 0 15px var(--cyan-glow);
+        animation: pulseHex 4s infinite ease-in-out;
+      }
+
+      @keyframes pulseHex {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--cyan-neon)); }
+        50% { transform: scale(1.04); filter: drop-shadow(0 0 12px var(--cyan-neon)); }
+      }
+
+      .brand-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        text-shadow: 0 0 12px rgba(0, 243, 255, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .brand-title .accent-sub {
+        color: var(--cyan-neon);
+        font-weight: 400;
+        font-size: 0.85rem;
+        letter-spacing: 0.14em;
+      }
+
+      .brand-subtitle {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.05em;
+      }
+
+      .header-telemetry {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .telemetry-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .telemetry-label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+      }
+
+      .telemetry-value {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--cyan-neon);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .defcon-badge {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        padding: 5px 12px;
+        min-height: 34px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--amber-warning);
+        background: rgba(255, 183, 0, 0.1);
+        color: var(--amber-warning);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        user-select: none;
+      }
+
+      .defcon-badge:hover {
+        background: rgba(255, 183, 0, 0.2);
+        box-shadow: 0 0 12px var(--amber-glow);
+      }
+
+      .defcon-badge.breach {
+        border-color: var(--crimson-breach);
+        background: rgba(255, 0, 85, 0.15);
+        color: var(--crimson-breach);
+        box-shadow: 0 0 15px var(--crimson-glow);
+        animation: pulseAlert 1.5s infinite;
+      }
+
+      @keyframes pulseAlert {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+
+      .header-controls {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .btn-cyber {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 8px 14px;
+        min-height: 38px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-glass);
+        background: rgba(0, 243, 255, 0.05);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        white-space: nowrap;
+      }
+
+      .btn-cyber:hover {
+        border-color: var(--cyan-neon);
+        background: rgba(0, 243, 255, 0.16);
+        color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.35);
+      }
+
+      .btn-cyber.active {
+        border-color: var(--cyan-neon);
+        background: rgba(0, 243, 255, 0.22);
+        color: var(--cyan-neon);
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.25);
+      }
+
+      .btn-cyber-danger {
+        border-color: rgba(255, 0, 85, 0.4);
+        background: rgba(255, 0, 85, 0.08);
+        color: #ff5588;
+      }
+      .btn-cyber-danger:hover {
+        border-color: var(--crimson-breach);
+        background: rgba(255, 0, 85, 0.2);
+        color: #ffffff;
+        box-shadow: 0 0 15px var(--crimson-glow);
+      }
+
+      /* Panel Headers */
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+      }
+
+      .panel-title {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .panel-tag {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--cyan-neon);
+        padding: 3px 8px;
+        background: rgba(0, 243, 255, 0.08);
+        border: 1px solid rgba(0, 243, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      /* Main Dynamic Grid */
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      @media (min-width: 1024px) {
+        .dashboard-grid {
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 24px;
+        }
+      }
+
+      @media (min-width: 1380px) {
+        .dashboard-grid {
+          grid-template-columns: 1.35fr 1fr;
+          gap: 24px;
+        }
+      }
+
+      /* Lower Row Grid */
+      .lower-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      @media (min-width: 900px) {
+        .lower-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+      }
+
+      /* RADAR & THREAT VISUALIZER PANEL */
+      .radar-wrapper {
+        position: relative;
+        width: 100%;
+        height: 380px;
+        background: radial-gradient(circle at center, rgba(0, 243, 255, 0.04) 0%, rgba(2, 4, 10, 0.95) 75%);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(0, 243, 255, 0.12);
+        overflow: hidden;
+      }
+
+      @media (min-width: 768px) {
+        .radar-wrapper {
+          height: 420px;
+        }
+      }
+
+      canvas#radarCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: crosshair;
+      }
+
+      .radar-hud-overlay {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+      }
+
+      .radar-hud-chip {
+        background: rgba(4, 8, 18, 0.85);
+        backdrop-filter: blur(8px);
+        padding: 4px 10px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 243, 255, 0.2);
+        pointer-events: auto;
+      }
+
+      .radar-filter-bar {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        pointer-events: auto;
+      }
+
+      .filter-btn {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        padding: 4px 9px;
+        background: rgba(4, 7, 18, 0.88);
+        border: 1px solid rgba(0, 243, 255, 0.18);
+        border-radius: 4px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .filter-btn:hover, .filter-btn.active {
+        background: rgba(0, 243, 255, 0.2);
+        border-color: var(--cyan-neon);
+        color: #ffffff;
+      }
+
+      /* Threat Ticker Strip */
+      .threat-stream {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 140px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+
+      .threat-stream::-webkit-scrollbar {
+        width: 4px;
+      }
+      .threat-stream::-webkit-scrollbar-thumb {
+        background: rgba(0, 243, 255, 0.25);
+        border-radius: 2px;
+      }
+
+      .threat-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px 12px;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(0, 243, 255, 0.08);
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        transition: background 0.15s ease;
+      }
+      .threat-row:hover {
+        background: rgba(0, 243, 255, 0.05);
+        border-color: rgba(0, 243, 255, 0.3);
+      }
+
+      .threat-badge {
+        font-size: 0.62rem;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .badge-crit { background: rgba(255, 0, 85, 0.2); color: #ff3377; border: 1px solid var(--crimson-breach); }
+      .badge-warn { background: rgba(255, 183, 0, 0.2); color: var(--amber-warning); border: 1px solid var(--amber-warning); }
+      .badge-sync { background: rgba(0, 255, 136, 0.2); color: var(--emerald-sync); border: 1px solid var(--emerald-sync); }
+
+      /* AI NEURAL CORE MODULE */
+      .neural-core-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .neural-core-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .neural-canvas-box {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        background: rgba(2, 4, 10, 0.85);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(176, 0, 255, 0.22);
+        overflow: hidden;
+      }
+
+      canvas#neuralCanvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .neural-stats-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.015);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(0, 243, 255, 0.1);
+      }
+
+      .metric-bar-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .metric-label-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+      }
+
+      .metric-track {
+        width: 100%;
+        height: 6px;
+        background: rgba(0, 243, 255, 0.08);
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .metric-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+      .metric-fill.cyan { background: linear-gradient(90deg, #0099ff, var(--cyan-neon)); box-shadow: 0 0 8px var(--cyan-glow); }
+      .metric-fill.purple { background: linear-gradient(90deg, #6600cc, var(--purple-neural)); box-shadow: 0 0 8px var(--purple-glow); }
+      .metric-fill.amber { background: linear-gradient(90deg, #cc8800, var(--amber-warning)); box-shadow: 0 0 8px var(--amber-glow); }
+      .metric-fill.emerald { background: linear-gradient(90deg, #00aa55, var(--emerald-sync)); box-shadow: 0 0 8px var(--emerald-glow); }
+
+      /* HARDWARE TELEMETRY & THERMAL GAUGES */
+      .telemetry-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .telemetry-row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .gauge-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(2, 5, 14, 0.85);
+        border: 1px solid rgba(0, 243, 255, 0.14);
+        border-radius: var(--radius-sm);
+        position: relative;
+      }
+
+      .gauge-svg-wrap {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .gauge-svg-wrap svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+
+      .gauge-value-center {
+        position: absolute;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .gauge-num {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .gauge-sub {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+
+      .control-slider-group {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .slider-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .slider-header {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+      }
+
+      .slider-val {
+        color: var(--cyan-neon);
+        font-weight: 600;
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        background: rgba(0, 243, 255, 0.12);
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--cyan-neon);
+        border: 2px solid #020205;
+        box-shadow: 0 0 10px var(--cyan-neon);
+        cursor: ew-resize;
+        transition: transform 0.1s ease;
+      }
+
+      input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.25);
+      }
+
+      /* HACKER CLI QUANTUM TERMINAL DRAWER */
+      .terminal-panel {
+        display: flex;
+        flex-direction: column;
+        background: rgba(3, 5, 12, 0.95);
+        border: 1px solid rgba(0, 243, 255, 0.22);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 1px 1px rgba(0, 243, 255, 0.1) inset;
+      }
+
+      .terminal-screen {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: #d8e5f7;
+        background: #010206;
+        border: 1px solid rgba(0, 243, 255, 0.12);
+        border-radius: var(--radius-sm);
+        padding: 14px;
+        height: 280px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        line-height: 1.55;
+        position: relative;
+      }
+
+      @media (min-width: 1024px) {
+        .terminal-screen {
+          height: 320px;
+        }
+      }
+
+      .terminal-screen::-webkit-scrollbar {
+        width: 6px;
+      }
+      .terminal-screen::-webkit-scrollbar-thumb {
+        background: rgba(0, 243, 255, 0.25);
+        border-radius: 3px;
+      }
+
+      .term-line {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        word-break: break-word;
+      }
+
+      .term-prefix {
+        color: var(--cyan-neon);
+        font-weight: 700;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .term-tag {
+        font-size: 0.65rem;
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .tag-sys { background: rgba(0, 243, 255, 0.15); color: var(--cyan-neon); }
+      .tag-warn { background: rgba(255, 183, 0, 0.15); color: var(--amber-warning); }
+      .tag-err { background: rgba(255, 0, 85, 0.18); color: var(--crimson-breach); }
+      .tag-qnt { background: rgba(176, 0, 255, 0.18); color: #d977ff; }
+      .tag-suc { background: rgba(0, 255, 136, 0.18); color: var(--emerald-sync); }
+
+      .term-input-wrapper {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #010206;
+        border: 1px solid rgba(0, 243, 255, 0.25);
+        border-radius: var(--radius-sm);
+        padding: 8px 12px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .term-input-wrapper:focus-within {
+        border-color: var(--cyan-neon);
+        box-shadow: 0 0 12px rgba(0, 243, 255, 0.25);
+      }
+
+      .cli-prompt {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--cyan-neon);
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      input#cliInput {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: #ffffff;
+        caret-color: var(--cyan-neon);
+      }
+
+      /* Prevent mobile auto-zoom on input focus */
+      @media (max-width: 768px) {
+        input#cliInput {
+          font-size: 16px;
+        }
+      }
+
+      /* Quick Command Action Chips */
+      .quick-commands {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .cmd-chip {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        background: rgba(0, 243, 255, 0.05);
+        border: 1px solid rgba(0, 243, 255, 0.15);
+        border-radius: 4px;
+        padding: 5px 9px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        user-select: none;
+      }
+
+      .cmd-chip:hover {
+        background: rgba(0, 243, 255, 0.18);
+        border-color: var(--cyan-neon);
+        color: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      /* ENES ÖZTÜRK ARCHITECTURAL WATERMARK & SIGNATURE BADGE */
+      .architect-badge-section {
+        margin-top: 8px;
+        padding: 16px 20px;
+        background: linear-gradient(90deg, rgba(2, 6, 18, 0.95) 0%, rgba(10, 16, 36, 0.92) 50%, rgba(2, 6, 18, 0.95) 100%);
+        border: 1px solid rgba(0, 243, 255, 0.22);
+        border-radius: var(--radius-panel);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 243, 255, 0.08) inset;
+        position: relative;
+      }
+
+      .architect-badge-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 20px;
+        right: 20px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--cyan-neon), transparent);
+        opacity: 0.6;
+      }
+
+      .architect-identity {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .architect-seal {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 243, 255, 0.25) 0%, rgba(176, 0, 255, 0.22) 60%, transparent 100%);
+        border: 1.5px solid var(--cyan-neon);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 12px var(--cyan-glow);
+        font-family: var(--font-display);
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.05em;
+      }
+
+      .architect-text-block {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .architect-primary-badge {
+        font-family: var(--font-display);
+        font-size: 0.94rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .architect-name {
+        color: var(--cyan-neon);
+        text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+      }
+
+      .architect-version {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--purple-neural);
+        padding: 2px 7px;
+        background: rgba(176, 0, 255, 0.12);
+        border: 1px solid rgba(176, 0, 255, 0.3);
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .architect-details {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .architect-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Modal for Architectural Specs */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(1, 2, 6, 0.85);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal-backdrop.open {
+        display: flex;
+      }
+
+      .modal-window {
+        background: rgba(8, 12, 28, 0.96);
+        border: 1px solid var(--cyan-neon);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 243, 255, 0.35);
+        border-radius: var(--radius-panel);
+        max-width: 650px;
+        width: 100%;
+        padding: 24px;
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-window::-webkit-scrollbar {
+        width: 6px;
+      }
+      .modal-window::-webkit-scrollbar-thumb {
+        background: rgba(0, 243, 255, 0.3);
+        border-radius: 3px;
+      }
+
+      .modal-close-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: transparent;
+        border: 1px solid rgba(0, 243, 255, 0.3);
+        color: var(--cyan-neon);
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+      .modal-close-btn:hover {
+        background: rgba(0, 243, 255, 0.2);
+        box-shadow: 0 0 10px var(--cyan-glow);
+      }
+
+      /* Blinking cursor */
+      .cursor-blink {
+        display: inline-block;
+        width: 7px;
+        height: 13px;
+        background-color: var(--cyan-neon);
+        margin-left: 2px;
+        vertical-align: middle;
+        animation: cursorBlink 1s infinite;
+      }
+
+      @keyframes cursorBlink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Scanlines CRT Grid Effect -->
+    <div id="scanlines" class="scanlines-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="nexus-container">
+      
+      <!-- TOP HUD & NAVIGATION -->
+      <header class="cyber-panel nexus-header">
+        <div class="brand-block">
+          <div class="brand-icon-hex">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f3ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-title">
+              NEXUSCORE <span class="accent-sub">// QUANTUM HUD</span>
+            </div>
+            <div class="brand-subtitle">THREAT VISUALIZER &amp; NEURAL CORE ENGINE</div>
+          </div>
+        </div>
+
+        <!-- Telemetry Items -->
+        <div class="header-telemetry">
+          <div class="telemetry-item">
+            <span class="telemetry-label">UTC CHRONO</span>
+            <span class="telemetry-value" id="utcChrono" title="Gerçek: tarayıcı saatinden UTC zaman">00:00:00 UTC</span>
+          </div>
+
+          <div class="telemetry-item">
+            <span class="telemetry-label">Q-ENTROPY</span>
+            <span class="telemetry-value" id="hdrEntropy" title="Rastgele üretilen dekoratif sayı — ölçüm değil">0.0384 ΔE</span>
+          </div>
+
+          <div class="telemetry-item">
+            <span class="telemetry-label">DEFENSE MATRIX</span>
+            <div class="defcon-badge" id="defconBtn" title="Dekoratif tema anahtarı: rengi/sayıyı değiştirir, gerçek alarm durumu değildir">
+              <span id="defconDot" style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber-warning);"></span>
+              <span id="defconText">DEFCON 2 // GUARDED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Control Action Buttons -->
+        <div class="header-controls">
+          <button class="btn-cyber" id="audioToggleBtn" title="Web Audio API osilatörleriyle üretilen efekt sesini aç/kapat (ses dosyası yok)">
+            <span id="audioIcon">🔊</span>
+            <span id="audioText">AUDIO: ON</span>
+          </button>
+          
+          <button class="btn-cyber" id="scanlinesToggleBtn" title="CSS CRT tarama çizgisi katmanını aç/kapat — görsel efekt">
+            <span>⚡</span>
+            <span>CRT SCAN</span>
+          </button>
+
+          <button class="btn-cyber btn-cyber-danger" id="purgeBtn" title="Kurgusal tehdit akışını arayüzden temizler — gerçek bir engelleme/temizleme yapılmaz">
+            <span>🛡️</span>
+            <span>TEHDİT TEMİZLE</span>
+          </button>
+
+          <button class="btn-cyber" id="exportBtn" title="O anki DOM’u tek .html dosyası olarak indirir; veriler sunucuya gitmez">
+            <span>📥</span>
+            <span>DIŞA AKTAR .HTML</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- UPPER DASHBOARD GRID (RADAR & AI NEURAL CORE) -->
+      <div class="dashboard-grid">
+        
+        <!-- PANEL: GLOBAL THREAT VECTOR RADAR -->
+        <section class="cyber-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f3ff" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+                <circle cx="12" cy="12" r="6"></circle>
+              </svg>
+              <span id="radarTitle">GLOBAL THREAT VECTOR RADAR · SİMÜLASYON</span>
+            </div>
+            <div class="panel-tag" id="radarTargetCount" title="Radar üzerinde gösterilen 8 düğüm kod içinde sabit yazılmış kurgusal örneklerdir">8 KURGUSAL DÜĞÜM</div>
+          </div>
+
+          <!-- Radar Canvas Box -->
+          <div class="radar-wrapper" id="radarContainer">
+            <canvas id="radarCanvas"></canvas>
+            
+            <div class="radar-hud-overlay">
+              <div class="radar-hud-chip" id="radarCoords" title="İmlecin canvas üzerindeki konumundan türetilen gösterge — GPS veya gerçek konum okunmaz">PROBE: LAT 37.77° N / LON 122.41° W</div>
+              <div class="radar-hud-chip" id="radarStatus" title="Gerçek olan: requestAnimationFrame ile dönen canvas süpürmesi">SWEEP: 360° CONTINUOUS</div>
+            </div>
+
+            <!-- Threat Filter Buttons -->
+            <div class="radar-filter-bar" title="Filtre, radar üzerindeki kurgusal düğümlerin parıltısını seçer; sayılar radarNodes veri kümesinden hesaplanır">
+              <button class="filter-btn active" data-filter="all">TÜM DÜĞÜMLER (<span data-count="all">8</span>)</button>
+              <button class="filter-btn" data-filter="breach">İHLAL (<span data-count="breach">0</span>)</button>
+              <button class="filter-btn" data-filter="ddos">DDoS VOLLEY (<span data-count="ddos">0</span>)</button>
+              <button class="filter-btn" data-filter="quantum">KUANTUM DRİFT (<span data-count="quantum">0</span>)</button>
+            </div>
+          </div>
+
+          <!-- Intercepted Threat Telemetry Stream -->
+          <div class="threat-stream" id="threatStream">
+            <!-- Dynamically populated rows -->
+          </div>
+        </section>
+
+        <!-- PANEL: AI NEURAL STATUS & QUANTUM ENTROPY -->
+        <section class="cyber-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b000ff" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+              </svg>
+              <span>AI NEURAL CORE &amp; Q-ENTROPY · SİMÜLASYON</span>
+            </div>
+            <button class="btn-cyber" id="injectPromptBtn" style="padding: 4px 10px; font-size: 0.68rem; min-height: 28px;" title="Animasyon: çubuğu %100’e çeker ve sabit sayı yazar — gerçek token üretimi yok">
+              <span>⚡</span> DEMO ÇEVRİM
+            </button>
+          </div>
+
+          <div class="neural-core-grid">
+            <!-- Interactive Synaptic Node Topology -->
+            <div class="neural-canvas-box">
+              <canvas id="neuralCanvas"></canvas>
+              <div style="position: absolute; bottom: 8px; left: 8px; font-family: var(--font-mono); font-size: 0.65rem; color: #a980ff;" title="Gerçek olan: 14 düğümün canvas üzerindeki hareketli çizim animasyonu. Kurgu: bunun bir model katmanı olduğu.">
+                TOPOLOJİ: 14 DÜĞÜM · DEKORATİF ANİMASYON
+              </div>
+            </div>
+
+            <!-- Neural Telemetry Bars -->
+            <div class="neural-stats-box">
+              <div class="metric-bar-group">
+                <div class="metric-label-row">
+                  <span>THROUGHPUT</span>
+                  <span id="tokSpeedVal" style="color: var(--cyan-neon); font-weight: 700;">218.4 tok/s</span>
+                </div>
+                <div class="metric-track">
+                  <div class="metric-fill cyan" id="tokBar" style="width: 74%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-bar-group">
+                <div class="metric-label-row">
+                  <span>QUANTUM COHERENCE</span>
+                  <span id="coherenceVal" style="color: var(--emerald-sync); font-weight: 700;">99.88%</span>
+                </div>
+                <div class="metric-track">
+                  <div class="metric-fill emerald" id="coherenceBar" style="width: 98%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-bar-group">
+                <div class="metric-label-row">
+                  <span>KV-CACHE SATURATION</span>
+                  <span id="kvCacheVal" style="color: var(--purple-neural); font-weight: 700;">48.2%</span>
+                </div>
+                <div class="metric-track">
+                  <div class="metric-fill purple" id="kvCacheBar" style="width: 48%;"></div>
+                </div>
+              </div>
+
+              <div class="metric-bar-group">
+                <div class="metric-label-row">
+                  <span>ATTENTION ENTROPY</span>
+                  <span id="entropyVal" style="color: var(--amber-warning); font-weight: 700;">0.041 J/K</span>
+                </div>
+                <div class="metric-track">
+                  <div class="metric-fill amber" id="entropyBar" style="width: 32%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); margin: 8px 0 0;">
+            Bu dört metrik (tok/s, coherence, KV-cache, entropy) ölçüm değildir: saniyelik zamanlayıcı ve
+            aşağıdaki kaydırıcıların formülünden üretilir. Gerçek bir model veya GPU okunmaz.
+          </p>
+
+          <!-- Bottom Micro-Telemetry Tickers -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px;">
+            <div style="padding: 8px; background: rgba(0, 243, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.1); border-radius: 4px; text-align: center;" title="Kod içinde sabit yazılmış dekoratif sayı — güncellenmez">
+              <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted);">LATENT DIM · SABİT</div>
+              <div style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: #ffffff;">8,192</div>
+            </div>
+            <div style="padding: 8px; background: rgba(176, 0, 255, 0.03); border: 1px solid rgba(176, 0, 255, 0.1); border-radius: 4px; text-align: center;" title="Kod içinde sabit yazılmış dekoratif sayı — güncellenmez">
+              <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted);">ACTIVE HEADS · SABİT</div>
+              <div style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--purple-neural);">64 / 64</div>
+            </div>
+            <div style="padding: 8px; background: rgba(0, 255, 136, 0.03); border: 1px solid rgba(0, 255, 136, 0.1); border-radius: 4px; text-align: center;" title="Kod içinde sabit yazılmış dekoratif sayı — güncellenmez">
+              <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted);">SPARSITY RATIO · SABİT</div>
+              <div style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--emerald-sync);">92.4%</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- LOWER DASHBOARD GRID (HARDWARE TELEMETRY & CLI QUANTUM TERMINAL) -->
+      <div class="lower-grid">
+
+        <!-- PANEL: HARDWARE TELEMETRY & THERMAL GAUGES -->
+        <section class="cyber-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb700" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+              </svg>
+              <span>TERMAL MODEL · SİMÜLASYON</span>
+            </div>
+            <div class="panel-tag" id="thermalStatusTag" style="border-color: var(--emerald-sync); color: var(--emerald-sync); background: rgba(0,255,136,0.1);" title="Etiket, aşağıdaki kaydırıcıları besleyen formülün sonucudur; gerçek sensör okuması değildir">
+              NOMINAL (NO THROTTLE)
+            </div>
+          </div>
+
+          <!-- Circular Gauges Row -->
+          <div class="telemetry-row">
+            <!-- Thermal Gauge -->
+            <div class="gauge-card">
+              <div class="gauge-svg-wrap">
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(0, 243, 255, 0.1)" stroke-width="8"></circle>
+                  <circle id="tempCircle" cx="50" cy="50" r="42" fill="none" stroke="#00f3ff" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="130" stroke-linecap="round"></circle>
+                </svg>
+                <div class="gauge-value-center">
+                  <div class="gauge-num" id="tempText">54°C</div>
+                  <div class="gauge-sub">DIE TEMP</div>
+                </div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary); margin-top: 8px;">
+                FAN SPEED: <span id="fanSpeedText" style="color: var(--cyan-neon);">3,420 RPM</span>
+              </div>
+            </div>
+
+            <!-- Memory Allocation Gauge -->
+            <div class="gauge-card" title="Sabit demo değeri: JavaScript bu ölçümü hiç güncellemez, gerçek GPU belleği okunmaz">
+              <div class="gauge-svg-wrap">
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(176, 0, 255, 0.1)" stroke-width="8"></circle>
+                  <circle id="memCircle" cx="50" cy="50" r="42" fill="none" stroke="#b000ff" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="74" stroke-linecap="round"></circle>
+                </svg>
+                <div class="gauge-value-center">
+                  <div class="gauge-num" id="memText">72%</div>
+                  <div class="gauge-sub">VRAM · SABİT</div>
+                </div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary); margin-top: 8px;">
+                ALLOC (DEMO): <span id="memAllocText" style="color: var(--purple-neural);">184.3 / 256 GB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model Sliders: girdi kaydırıcı, çıktı termal model formülü -->
+          <div class="control-slider-group">
+            <div class="slider-item">
+              <div class="slider-header">
+                <span title="Kaydırıcı değeri yalnızca bu arayüzdeki termal modeli besler; donanım saati okunmaz veya değiştirilmez">CPU FREKANSI · MODEL GİRDİSİ</span>
+                <span class="slider-val" id="cpuSliderVal">4.80 GHz</span>
+              </div>
+              <input type="range" id="cpuFreqSlider" min="32" max="60" value="48" step="1" aria-label="Model girdisi: CPU frekansı kaydırıcısı" />
+            </div>
+
+            <div class="slider-item">
+              <div class="slider-header">
+                <span title="Kaydırıcı değeri yalnızca bu arayüzdeki termal modeli besler; donanım saati okunmaz veya değiştirilmez">GPU SAATİ · MODEL GİRDİSİ</span>
+                <span class="slider-val" id="gpuSliderVal">2,450 MHz</span>
+              </div>
+              <input type="range" id="gpuFreqSlider" min="1600" max="3200" value="2450" step="50" aria-label="Model girdisi: GPU saat hızı kaydırıcısı" />
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-secondary); margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(0, 243, 255, 0.08);">
+              <span>MODEL ÇIKTISI · GÜÇ: <strong id="powerDrawText" style="color: var(--amber-warning);">285W</strong></span>
+              <span>MODEL ÇIKTISI · GERİLİM: <strong id="voltageText" style="color: var(--cyan-neon);">1.185V</strong></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- PANEL: HACKER-STYLE QUANTUM CLI TERMINAL -->
+        <section class="cyber-panel terminal-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f3ff" stroke-width="2">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+              </svg>
+              <span>QUANTUM CLI TERMINAL // NEXUS-CORE</span>
+            </div>
+            <div class="panel-tag" style="background: rgba(0, 255, 136, 0.1); border-color: var(--emerald-sync); color: var(--emerald-sync);">
+              SHELL: ACTIVE
+            </div>
+          </div>
+
+          <!-- Terminal Output Screen with Realistic Typewriter Log -->
+          <div class="terminal-screen" id="terminalScreen">
+            <div class="term-line">
+              <span class="term-tag tag-sys">[SYSTEM]</span>
+              <span>NexusCore v4.0 arayüzü açıldı. Bu bir <strong>görsel simülasyondur</strong>: veri kaynağı yoktur, ağdan yalnızca Google Fonts gelir.</span>
+            </div>
+            <div class="term-line">
+              <span class="term-tag tag-qnt">[KURGUSAL]</span>
+              <span>Radar düğümleri kod içinde sabit örnek veridir — gerçek sunucu veya cihaz izlenmez.</span>
+            </div>
+            <div class="term-line">
+              <span class="term-tag tag-warn">[DEFCON 2]</span>
+              <span>DEFCON rozeti dekoratif tema anahtarıdır. Komutlar için <code style="color: var(--cyan-neon); font-weight: bold;">help</code> yazın.</span>
+            </div>
+          </div>
+
+          <!-- Quick Action Commands -->
+          <div class="quick-commands">
+            <span class="cmd-chip" data-cmd="scan">scan</span>
+            <span class="cmd-chip" data-cmd="quantum_sync">quantum_sync</span>
+            <span class="cmd-chip" data-cmd="ai_status">ai_status</span>
+            <span class="cmd-chip" data-cmd="override">override</span>
+            <span class="cmd-chip" data-cmd="matrix">matrix</span>
+            <span class="cmd-chip" data-cmd="threat_purge">threat_purge</span>
+            <span class="cmd-chip" data-cmd="architect">architect</span>
+            <span class="cmd-chip" data-cmd="clear">clear</span>
+          </div>
+
+          <!-- CLI Command Input -->
+          <form id="cliForm" class="term-input-wrapper">
+            <span class="cli-prompt">nexus@core-v4:~$</span>
+            <input type="text" id="cliInput" autocomplete="off" spellcheck="false" placeholder="komut yazın (örn. 'scan', 'ai_status', 'architect') — çıktılar simülasyondur" />
+            <button type="submit" class="btn-cyber" style="padding: 4px 12px; font-size: 0.7rem; min-height: 28px;">EXEC</button>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- ENES ÖZTÜRK SIGNATURE WATERMARK & ARCHITECTURAL BADGE -->
+      <footer class="architect-badge-section">
+        <div class="architect-identity">
+          <div class="architect-seal">EÖ</div>
+          <div class="architect-text-block">
+            <div class="architect-primary-badge">
+              <span>Tasarım ve Kod:</span>
+              <span class="architect-name">Enes Öztürk</span>
+              <span class="architect-version">NexusCore v4.0</span>
+            </div>
+            <div class="architect-details">
+              <span>© 2026 Enes Öztürk · tüm hakları saklıdır</span>
+              <span aria-hidden="true">·</span>
+              <span>KOD: Tek dosyalık HTML · derleme hash’i yok</span>
+              <span aria-hidden="true">·</span>
+              <span>ÇEKİRDEK: TARAYICI (JS/CSS)</span>
+              <span aria-hidden="true">·</span>
+              <span>OTURUM: <span id="uptimeCounter" style="color: var(--emerald-sync);" title="Gerçek: sayfa açıldığından bu yana geçen süre">00:00:00</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="architect-actions">
+          <button class="btn-cyber" id="openSpecsBtn" title="Gerçek/kurgu dökümanını aç — hangi metrikler ölçüm, hangi metrikler formül çıktısı">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>SYSTEM SPECS</span>
+          </button>
+
+          <button class="btn-cyber" id="footerExportBtn" title="O anki DOM’u tek .html dosyası olarak indir — sunucuya veri gitmez">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>STANDALONE .HTML</span>
+          </button>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- ARCHITECTURAL SPECS MODAL -->
+    <div id="specsModal" class="modal-backdrop">
+      <div class="modal-window">
+        <button class="modal-close-btn" id="closeSpecsBtn">✕</button>
+        
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <div class="architect-seal" style="width: 38px; height: 38px; font-size: 0.85rem;">EÖ</div>
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 1.15rem; color: #ffffff;">NexusCore Architecture Dossier</h2>
+            <p style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan-neon);">Architected &amp; Designed by Enes Öztürk // NexusCore v4.0</p>
+          </div>
+        </div>
+
+        <div style="font-family: var(--font-body); font-size: 0.85rem; color: #bed2ea; line-height: 1.6; display: flex; flex-direction: column; gap: 14px;">
+          <p>
+            <strong>NexusCore // AI Quantum Terminal &amp; Threat Visualizer</strong>, Enes Öztürk imzalı bir cyberpunk <em>arayüz demosudur</em>. Radar, tehdit akışı, termal gauges ve token metrikleri gerçek bir izleme sistemine bağlı değildir: düğüm listesi kod içinde sabittir, geri kalan değerler zamanlayıcı ve formüllerle üretilir. Gerçek olan kısım etkileşimdir — Canvas 2D çizimi, Web Audio ses sentezi, CLI komut geçmişi, kaydırıcılar ve UTC saat çalışır. Uygulama sunucuya veri göndermez; tek dış kaynak Google Fonts yazı tipleridir.
+          </p>
+
+          <div style="background: rgba(0, 243, 255, 0.04); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.75rem;">
+            <div style="color: var(--cyan-neon); font-weight: bold; margin-bottom: 6px;">ARCHITECTURAL PILLARS:</div>
+            <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 4px;">
+              <li><strong>Zero Bloat:</strong> Tek dosyalık vanilla HTML5 + CSS3 + ES6+ JavaScript; harici JS kütüphanesi yok (yalnızca Google Fonts CSS’i indirilir).</li>
+              <li><strong>Web Audio Synthesizer:</strong> Native browser Web Audio API generating procedural cyberpunk radar clicks, chirps, and warning sirens. <em>(gerçek: osilatörler, ses dosyası yok)</em></li>
+              <li><strong>Vector Canvas Engine:</strong> High-DPI radar simulation with rotating phosphor sweep, bezier packet vectors, and dynamic threat telemetry. <em>(gerçek: canvas çizimi · kurgu: düğümler ve olaylar)</em></li>
+              <li><strong>Quantum CLI:</strong> Terminal drawer with command history, color-coded logging ve kaydırıcılı model çıktıları. <em>(gerçek: komut geçmişi/typewriter · kurgu: “sensör” çıktısı)</em></li>
+              <li><strong>Cyber-Glassmorphism:</strong> Deep void obsidian background with frosted backdrop-filter blurring and crisp multi-color glowing telemetry.</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+            <button class="btn-cyber" id="modalDismissBtn">CLOSE DOSSIER</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         NEXUSCORE ES6+ VANILLA JAVASCRIPT MOTORU
+         Yazar: Enes Öztürk · Harici JS kütüphanesi yok (tek dış kaynak Google Fonts CSS).
+         Gösterilen tehdit/metrik değerleri simülasyondur; ağdan veri toplanmaz.
+         ========================================================================== -->
+    <script type="module">
+      /* --------------------------------------------------------------------------
+         1. AUDIO SYNTHESIZER (Web Audio API)
+         -------------------------------------------------------------------------- */
+      class CyberAudioEngine {
+        constructor() {
+          this.enabled = true;
+          this.ctx = null;
+        }
+
+        initContext() {
+          if (!this.ctx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+              this.ctx = new AudioContext();
+            }
+          }
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+        }
+
+        playTone(freq, type = 'sine', duration = 0.08, gainVal = 0.05) {
+          if (!this.enabled) return;
+          try {
+            this.initContext();
+            if (!this.ctx) return;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+            gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + duration);
+          } catch {
+            // Audio context failure gracefully swallowed
+          }
+        }
+
+        click() {
+          this.playTone(1800, 'sine', 0.02, 0.03);
+        }
+
+        keyPress() {
+          this.playTone(2400 + Math.random() * 400, 'triangle', 0.015, 0.015);
+        }
+
+        radarPing() {
+          this.playTone(880, 'sine', 0.22, 0.035);
+        }
+
+        success() {
+          this.playTone(523.25, 'sine', 0.1, 0.05);
+          setTimeout(() => this.playTone(659.25, 'sine', 0.15, 0.05), 80);
+        }
+
+        warning() {
+          this.playTone(320, 'sawtooth', 0.2, 0.06);
+        }
+
+        breachAlarm() {
+          this.playTone(600, 'sawtooth', 0.15, 0.08);
+          setTimeout(() => this.playTone(450, 'sawtooth', 0.15, 0.08), 120);
+        }
+
+        quantumChime() {
+          this.playTone(440, 'sine', 0.25, 0.04);
+          setTimeout(() => this.playTone(880, 'sine', 0.35, 0.03), 100);
+          setTimeout(() => this.playTone(1320, 'triangle', 0.45, 0.02), 200);
+        }
+      }
+
+      const audio = new CyberAudioEngine();
+
+      /* --------------------------------------------------------------------------
+         2. STATE MANAGEMENT & DATA MODELS
+         -------------------------------------------------------------------------- */
+      const state = {
+        defcon: 2,
+        scanlines: true,
+        cpuClock: 4.8,
+        gpuClock: 2450,
+        temp: 54,
+        memPercent: 72,
+        tokensPerSec: 218.4,
+        coherence: 99.88,
+        entropy: 0.0384,
+        threatFilter: 'all',
+        uptimeSeconds: 0, // oturum açılışından bu yana geçen saniye — gerçek sayaç
+        radarNodes: [
+          // Kurgusal örnek veri: aşağıdaki adlar/IP’ler temsilidir, gerçek altyapı izlenmez
+          { name: 'Tokyo-HUB-01', x: 0.82, y: 0.42, ip: '133.242.18.9', status: 'ONLINE', threat: null },
+          { name: 'Frankfurt-IX-04', x: 0.52, y: 0.32, ip: '194.109.6.92', status: 'ONLINE', threat: 'DDoS Volley' },
+          { name: 'SanFrancisco-DC-09', x: 0.22, y: 0.38, ip: '104.244.42.1', status: 'ONLINE', threat: 'Quantum Probe' },
+          { name: 'Singapore-NODE-03', x: 0.76, y: 0.58, ip: '165.21.84.12', status: 'ONLINE', threat: null },
+          { name: 'Reykjavik-GEOTHERMAL', x: 0.44, y: 0.22, ip: '82.221.36.4', status: 'ONLINE', threat: null },
+          { name: 'SãoPaulo-DC-02', x: 0.36, y: 0.74, ip: '200.147.67.142', status: 'ONLINE', threat: 'Kernel Breach Attempt' },
+          { name: 'Ankara-QUANTUM-NODE', x: 0.58, y: 0.38, ip: '212.156.4.1', status: 'ONLINE', threat: null },
+          { name: 'Sydney-HUB-07', x: 0.88, y: 0.78, ip: '139.130.4.5', status: 'ONLINE', threat: 'DDoS Volley' },
+        ],
+        threatLog: [
+          // Kurgusal örnek kayıtlar: bunlar sabit yazılmış metinlerdir, gerçek olay yakalanmadı
+          { id: 'THR-8891', type: 'breach', label: 'KRİTİK', text: 'São Paulo DC-02 üzerinde kernel bypass vektörü (örnek kayıt)', time: '12s önce' },
+          { id: 'THR-8890', type: 'ddos', label: 'UYARI', text: 'Frankfurt IX hedefli SYN flood dalgası — 420 Gbps (örnek kayıt)', time: '34s önce' },
+          { id: 'THR-8889', type: 'quantum', label: 'KUANTUM KAYBI', text: 'SF-DC-09’da faz kayması Δθ: 0.0084 rad (örnek kayıt)', time: '1dk önce' },
+          { id: 'THR-8888', type: 'ddos', label: 'UYARI', text: 'Sydney Hub boyunca UDP yansıma atışı (örnek kayıt)', time: '2dk önce' },
+        ],
+        commandHistory: [],
+        historyIndex: -1,
+        isTyping: false
+      };
+
+      /* --------------------------------------------------------------------------
+         3. RADAR & GLOBAL THREAT VECTOR CANVAS
+         -------------------------------------------------------------------------- */
+      const radarCanvas = document.getElementById('radarCanvas');
+      const radarCtx = radarCanvas.getContext('2d');
+      let radarAngle = 0;
+      let radarPackets = [];
+
+      function resizeRadarCanvas() {
+        const rect = radarCanvas.parentElement.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        radarCanvas.width = rect.width * dpr;
+        radarCanvas.height = rect.height * dpr;
+        radarCtx.scale(dpr, dpr);
+      }
+
+      window.addEventListener('resize', resizeRadarCanvas);
+      resizeRadarCanvas();
+
+      // Seed packets
+      for (let i = 0; i < 7; i++) {
+        radarPackets.push({
+          sourceIndex: Math.floor(Math.random() * state.radarNodes.length),
+          targetIndex: Math.floor(Math.random() * state.radarNodes.length),
+          progress: Math.random(),
+          speed: 0.0035 + Math.random() * 0.005,
+          color: Math.random() > 0.4 ? '#00f3ff' : '#ff0055'
+        });
+      }
+
+      function drawRadar() {
+        const w = radarCanvas.width / (window.devicePixelRatio || 1);
+        const h = radarCanvas.height / (window.devicePixelRatio || 1);
+        const cx = w / 2;
+        const cy = h / 2;
+        const radius = Math.min(w, h) * 0.44;
+
+        radarCtx.clearRect(0, 0, w, h);
+
+        // 1. Draw Polar Coordinate Rings
+        radarCtx.strokeStyle = 'rgba(0, 243, 255, 0.12)';
+        radarCtx.lineWidth = 1;
+        for (let r = 0.25; r <= 1.0; r += 0.25) {
+          radarCtx.beginPath();
+          radarCtx.arc(cx, cy, radius * r, 0, Math.PI * 2);
+          radarCtx.stroke();
+        }
+
+        // Crosshairs
+        radarCtx.beginPath();
+        radarCtx.moveTo(cx - radius * 1.05, cy);
+        radarCtx.lineTo(cx + radius * 1.05, cy);
+        radarCtx.moveTo(cx, cy - radius * 1.05);
+        radarCtx.lineTo(cx, cy + radius * 1.05);
+        radarCtx.stroke();
+
+        // Diagonal grid guides
+        radarCtx.strokeStyle = 'rgba(0, 243, 255, 0.05)';
+        radarCtx.beginPath();
+        radarCtx.moveTo(cx - radius * 0.7, cy - radius * 0.7);
+        radarCtx.lineTo(cx + radius * 0.7, cy + radius * 0.7);
+        radarCtx.moveTo(cx - radius * 0.7, cy + radius * 0.7);
+        radarCtx.lineTo(cx + radius * 0.7, cy - radius * 0.7);
+        radarCtx.stroke();
+
+        // 2. Draw Packet Vectors (Arcs between nodes)
+        radarPackets.forEach(p => {
+          if (p.sourceIndex === p.targetIndex) {
+            p.targetIndex = (p.targetIndex + 1) % state.radarNodes.length;
+          }
+          const src = state.radarNodes[p.sourceIndex];
+          const tgt = state.radarNodes[p.targetIndex];
+
+          const sx = src.x * w;
+          const sy = src.y * h;
+          const tx = tgt.x * w;
+          const ty = tgt.y * h;
+
+          // Arc path
+          radarCtx.beginPath();
+          radarCtx.strokeStyle = 'rgba(0, 243, 255, 0.08)';
+          radarCtx.lineWidth = 1;
+          radarCtx.moveTo(sx, sy);
+          const midX = (sx + tx) / 2;
+          const midY = (sy + ty) / 2 - 28;
+          radarCtx.quadraticCurveTo(midX, midY, tx, ty);
+          radarCtx.stroke();
+
+          // Packet projectile
+          p.progress += p.speed;
+          if (p.progress >= 1) {
+            p.progress = 0;
+            p.sourceIndex = Math.floor(Math.random() * state.radarNodes.length);
+            p.targetIndex = Math.floor(Math.random() * state.radarNodes.length);
+          }
+
+          // Quadratic bezier interpolation
+          const t = p.progress;
+          const px = (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * midX + t * t * tx;
+          const py = (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * midY + t * t * ty;
+
+          radarCtx.beginPath();
+          radarCtx.arc(px, py, 3, 0, Math.PI * 2);
+          radarCtx.fillStyle = p.color;
+          radarCtx.shadowColor = p.color;
+          radarCtx.shadowBlur = 8;
+          radarCtx.fill();
+          radarCtx.shadowBlur = 0;
+        });
+
+        // 3. Draw Nodes with Tactical Ripples
+        const timeNow = Date.now() * 0.003;
+        state.radarNodes.forEach(node => {
+          const nx = node.x * w;
+          const ny = node.y * h;
+          const isThreat = node.threat !== null;
+
+          // Filter check
+          let showThreatGlow = isThreat;
+          if (state.threatFilter === 'breach' && node.threat !== 'Kernel Breach Attempt') showThreatGlow = false;
+          if (state.threatFilter === 'ddos' && node.threat !== 'DDoS Volley') showThreatGlow = false;
+          if (state.threatFilter === 'quantum' && node.threat !== 'Quantum Probe') showThreatGlow = false;
+
+          // Threat Pulsing Ring
+          if (showThreatGlow) {
+            const rippleR = 8 + (Math.sin(timeNow + nx) + 1) * 6;
+            radarCtx.beginPath();
+            radarCtx.arc(nx, ny, rippleR, 0, Math.PI * 2);
+            radarCtx.strokeStyle = 'rgba(255, 0, 85, 0.4)';
+            radarCtx.lineWidth = 1;
+            radarCtx.stroke();
+          }
+
+          // Node Halo
+          radarCtx.beginPath();
+          radarCtx.arc(nx, ny, showThreatGlow ? 8 : 5, 0, Math.PI * 2);
+          radarCtx.fillStyle = showThreatGlow ? 'rgba(255, 0, 85, 0.3)' : 'rgba(0, 243, 255, 0.2)';
+          radarCtx.fill();
+
+          // Node Core
+          radarCtx.beginPath();
+          radarCtx.arc(nx, ny, showThreatGlow ? 4 : 2.5, 0, Math.PI * 2);
+          radarCtx.fillStyle = showThreatGlow ? '#ff0055' : '#00f3ff';
+          radarCtx.shadowColor = showThreatGlow ? '#ff0055' : '#00f3ff';
+          radarCtx.shadowBlur = 10;
+          radarCtx.fill();
+          radarCtx.shadowBlur = 0;
+
+          // Node Text Label
+          radarCtx.font = '9px "JetBrains Mono", monospace';
+          radarCtx.fillStyle = showThreatGlow ? '#ff5588' : '#8499b5';
+          radarCtx.fillText(node.name, nx + 8, ny + 3);
+        });
+
+        // 4. Rotating Phosphor Sweep Line
+        radarAngle += 0.018;
+        if (radarAngle > Math.PI * 2) {
+          radarAngle = 0;
+          if (Math.random() > 0.6) audio.radarPing();
+        }
+
+        radarCtx.save();
+        radarCtx.translate(cx, cy);
+        radarCtx.rotate(radarAngle);
+
+        // Sweep gradient
+        const sweepGrad = radarCtx.createRadialGradient(0, 0, 0, 0, 0, radius);
+        sweepGrad.addColorStop(0, 'rgba(0, 243, 255, 0)');
+        sweepGrad.addColorStop(0.8, 'rgba(0, 243, 255, 0.05)');
+        sweepGrad.addColorStop(1, 'rgba(0, 243, 255, 0.25)');
+
+        radarCtx.beginPath();
+        radarCtx.moveTo(0, 0);
+        radarCtx.arc(0, 0, radius, 0, Math.PI / 4);
+        radarCtx.closePath();
+        radarCtx.fillStyle = sweepGrad;
+        radarCtx.fill();
+
+        // Main bright sweep edge
+        radarCtx.beginPath();
+        radarCtx.moveTo(0, 0);
+        radarCtx.lineTo(radius, 0);
+        radarCtx.strokeStyle = 'rgba(0, 243, 255, 0.8)';
+        radarCtx.shadowColor = '#00f3ff';
+        radarCtx.shadowBlur = 12;
+        radarCtx.lineWidth = 1.5;
+        radarCtx.stroke();
+        radarCtx.restore();
+
+        requestAnimationFrame(drawRadar);
+      }
+
+      requestAnimationFrame(drawRadar);
+
+      // Radar Canvas Mouse Interaction
+      radarCanvas.addEventListener('mousemove', (e) => {
+        const rect = radarCanvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const lat = ((0.5 - y) * 180).toFixed(2);
+        const lon = ((x - 0.5) * 360).toFixed(2);
+        document.getElementById('radarCoords').textContent = `PROBE: LAT ${Math.abs(lat)}° ${lat >= 0 ? 'N' : 'S'} / LON ${Math.abs(lon)}° ${lon >= 0 ? 'E' : 'W'}`;
+      });
+
+      radarCanvas.addEventListener('click', (e) => {
+        audio.click();
+        const rect = radarCanvas.getBoundingClientRect();
+        const clickX = (e.clientX - rect.left) / rect.width;
+        const clickY = (e.clientY - rect.top) / rect.height;
+
+        let foundNode = null;
+        state.radarNodes.forEach(node => {
+          const dx = node.x - clickX;
+          const dy = node.y - clickY;
+          if (Math.sqrt(dx * dx + dy * dy) < 0.06) {
+            foundNode = node;
+          }
+        });
+
+        if (foundNode) {
+          typewriterLog('SYS', `KURGUSAL DÜĞÜM: ${foundNode.name} [IP: ${foundNode.ip}] — kod içindeki örnek kayıt okundu, ağa soru gitmedi.`);
+          if (foundNode.threat) {
+            setTimeout(() => {
+              typewriterLog('ERR', `ÖRNEK KAYIT: ${foundNode.threat} etiketi bu düğümle ilişkilendirilmişti.`);
+            }, 300);
+          }
+        } else {
+          typewriterLog('SYS', 'Bu konumda düğüm yok — tıklama yalnızca bu logu üretti; gerçek bir istek gönderilmedi.');
+        }
+      });
+
+      /* --------------------------------------------------------------------------
+         4. AI NEURAL TOPOLOGY CANVAS
+         -------------------------------------------------------------------------- */
+      const neuralCanvas = document.getElementById('neuralCanvas');
+      const neuralCtx = neuralCanvas.getContext('2d');
+      const neuralNodes = [];
+
+      function resizeNeuralCanvas() {
+        const rect = neuralCanvas.parentElement.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        neuralCanvas.width = rect.width * dpr;
+        neuralCanvas.height = rect.height * dpr;
+        neuralCtx.scale(dpr, dpr);
+      }
+
+      window.addEventListener('resize', resizeNeuralCanvas);
+      resizeNeuralCanvas();
+
+      for (let i = 0; i < 14; i++) {
+        neuralNodes.push({
+          x: 0.1 + Math.random() * 0.8,
+          y: 0.15 + Math.random() * 0.7,
+          vx: (Math.random() - 0.5) * 0.0015,
+          vy: (Math.random() - 0.5) * 0.0015,
+          size: 2.5 + Math.random() * 3,
+          pulse: Math.random() * Math.PI * 2
+        });
+      }
+
+      function drawNeuralCore() {
+        const w = neuralCanvas.width / (window.devicePixelRatio || 1);
+        const h = neuralCanvas.height / (window.devicePixelRatio || 1);
+
+        neuralCtx.clearRect(0, 0, w, h);
+
+        // Update positions
+        neuralNodes.forEach(n => {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0.08 || n.x > 0.92) n.vx *= -1;
+          if (n.y < 0.08 || n.y > 0.92) n.vy *= -1;
+          n.pulse += 0.04;
+        });
+
+        // Draw Synaptic Connectors
+        for (let i = 0; i < neuralNodes.length; i++) {
+          for (let j = i + 1; j < neuralNodes.length; j++) {
+            const na = neuralNodes[i];
+            const nb = neuralNodes[j];
+            const dx = (na.x - nb.x) * w;
+            const dy = (na.y - nb.y) * h;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 85) {
+              const alpha = (1 - dist / 85) * 0.5;
+              neuralCtx.beginPath();
+              neuralCtx.moveTo(na.x * w, na.y * h);
+              neuralCtx.lineTo(nb.x * w, nb.y * h);
+              neuralCtx.strokeStyle = `rgba(176, 0, 255, ${alpha})`;
+              neuralCtx.lineWidth = 1;
+              neuralCtx.stroke();
+            }
+          }
+        }
+
+        // Draw Nodes
+        neuralNodes.forEach(n => {
+          const currentSize = n.size + Math.sin(n.pulse) * 1.2;
+          neuralCtx.beginPath();
+          neuralCtx.arc(n.x * w, n.y * h, currentSize, 0, Math.PI * 2);
+          neuralCtx.fillStyle = '#b000ff';
+          neuralCtx.shadowColor = '#d977ff';
+          neuralCtx.shadowBlur = 10;
+          neuralCtx.fill();
+          neuralCtx.shadowBlur = 0;
+
+          neuralCtx.beginPath();
+          neuralCtx.arc(n.x * w, n.y * h, currentSize * 0.4, 0, Math.PI * 2);
+          neuralCtx.fillStyle = '#ffffff';
+          neuralCtx.fill();
+        });
+
+        requestAnimationFrame(drawNeuralCore);
+      }
+
+      requestAnimationFrame(drawNeuralCore);
+
+      /* --------------------------------------------------------------------------
+         5. HARDWARE SLIDERS & THERMODYNAMICS LOGIC
+         -------------------------------------------------------------------------- */
+      const cpuSlider = document.getElementById('cpuFreqSlider');
+      const gpuSlider = document.getElementById('gpuFreqSlider');
+      const tempCircle = document.getElementById('tempCircle');
+      const tempText = document.getElementById('tempText');
+      const thermalStatusTag = document.getElementById('thermalStatusTag');
+      const fanSpeedText = document.getElementById('fanSpeedText');
+      const powerDrawText = document.getElementById('powerDrawText');
+      const voltageText = document.getElementById('voltageText');
+
+      function updateHardwareMetrics() {
+        const cpuGhz = (cpuSlider.value / 10).toFixed(2);
+        const gpuMhz = parseInt(gpuSlider.value);
+
+        document.getElementById('cpuSliderVal').textContent = `${cpuGhz} GHz`;
+        document.getElementById('gpuSliderVal').textContent = `${gpuMhz} MHz`;
+
+        // Thermodynamics math
+        const cpuLoadFactor = (cpuGhz - 3.2) / 2.8;
+        const gpuLoadFactor = (gpuMhz - 1600) / 1600;
+        const totalLoad = (cpuLoadFactor * 0.6 + gpuLoadFactor * 0.4);
+
+        const calculatedTemp = Math.round(44 + totalLoad * 46);
+        state.temp = calculatedTemp;
+        tempText.textContent = `${calculatedTemp}°C`;
+
+        // SVG stroke offset (circumference = 264)
+        const circumference = 264;
+        const tempRatio = Math.min(Math.max((calculatedTemp - 30) / 70, 0), 1);
+        const offset = circumference - (circumference * tempRatio);
+        tempCircle.style.strokeDashoffset = offset;
+
+        // Fan RPM & Power
+        const fanRPM = Math.round(2200 + totalLoad * 3600);
+        fanSpeedText.textContent = `${fanRPM.toLocaleString()} RPM`;
+
+        const powerWatts = Math.round(180 + totalLoad * 260);
+        powerDrawText.textContent = `${powerWatts}W`;
+
+        const voltage = (1.05 + totalLoad * 0.28).toFixed(3);
+        voltageText.textContent = `${voltage}V`;
+
+        // Thermal State Styling
+        if (calculatedTemp > 82) {
+          tempCircle.style.stroke = '#ff0055';
+          thermalStatusTag.style.borderColor = 'var(--crimson-breach)';
+          thermalStatusTag.style.color = 'var(--crimson-breach)';
+          thermalStatusTag.style.background = 'rgba(255, 0, 85, 0.15)';
+          thermalStatusTag.textContent = 'THERMAL THROTTLE ACTIVE [CRITICAL]';
+        } else if (calculatedTemp > 68) {
+          tempCircle.style.stroke = '#ffb700';
+          thermalStatusTag.style.borderColor = 'var(--amber-warning)';
+          thermalStatusTag.style.color = 'var(--amber-warning)';
+          thermalStatusTag.style.background = 'rgba(255, 183, 0, 0.15)';
+          thermalStatusTag.textContent = 'ELEVATED DIE TEMP';
+        } else {
+          tempCircle.style.stroke = '#00f3ff';
+          thermalStatusTag.style.borderColor = 'var(--emerald-sync)';
+          thermalStatusTag.style.color = 'var(--emerald-sync)';
+          thermalStatusTag.style.background = 'rgba(0, 255, 136, 0.1)';
+          thermalStatusTag.textContent = 'NOMINAL (NO THROTTLE)';
+        }
+
+        // Token Speed proportional to clocks
+        state.tokensPerSec = +(120 + cpuGhz * 18 + (gpuMhz / 100) * 3.8).toFixed(1);
+        document.getElementById('tokSpeedVal').textContent = `${state.tokensPerSec} tok/s`;
+        document.getElementById('tokBar').style.width = `${Math.min((state.tokensPerSec / 320) * 100, 100)}%`;
+      }
+
+      cpuSlider.addEventListener('input', () => {
+        audio.keyPress();
+        updateHardwareMetrics();
+      });
+
+      gpuSlider.addEventListener('input', () => {
+        audio.keyPress();
+        updateHardwareMetrics();
+      });
+
+      updateHardwareMetrics();
+
+      /* --------------------------------------------------------------------------
+         6. INTERACTIVE HACKER QUANTUM TERMINAL WITH REALISTIC TYPEWRITER LOGGING
+         -------------------------------------------------------------------------- */
+      const terminalScreen = document.getElementById('terminalScreen');
+      const cliForm = document.getElementById('cliForm');
+      const cliInput = document.getElementById('cliInput');
+
+      // Realistic Typewriter Logging Queue
+      const logQueue = [];
+      let isProcessingQueue = false;
+
+      function typewriterLog(tag, message, colorClass = '') {
+        logQueue.push({ tag, message, colorClass });
+        if (!isProcessingQueue) {
+          processLogQueue();
+        }
+      }
+
+      function processLogQueue() {
+        if (logQueue.length === 0) {
+          isProcessingQueue = false;
+          return;
+        }
+
+        isProcessingQueue = true;
+        const item = logQueue.shift();
+
+        const row = document.createElement('div');
+        row.className = 'term-line';
+
+        let tagClass = 'tag-sys';
+        if (item.tag === 'WARN') tagClass = 'tag-warn';
+        if (item.tag === 'ERR' || item.tag === 'BREACH') tagClass = 'tag-err';
+        if (item.tag === 'QNT') tagClass = 'tag-qnt';
+        if (item.tag === 'SUC') tagClass = 'tag-suc';
+
+        const tagSpan = document.createElement('span');
+        tagSpan.className = `term-tag ${tagClass}`;
+        tagSpan.textContent = `[${item.tag}]`;
+
+        const msgSpan = document.createElement('span');
+        if (item.colorClass) msgSpan.className = item.colorClass;
+
+        row.appendChild(tagSpan);
+        row.appendChild(msgSpan);
+        terminalScreen.appendChild(row);
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+
+        // Type character by character
+        let charIndex = 0;
+        const text = item.message;
+        const charDelay = text.length > 80 ? 4 : 8;
+
+        function typeNextChar() {
+          if (charIndex < text.length) {
+            msgSpan.textContent += text[charIndex];
+            charIndex++;
+            terminalScreen.scrollTop = terminalScreen.scrollHeight;
+            if (charIndex % 4 === 0) audio.keyPress();
+            setTimeout(typeNextChar, charDelay);
+          } else {
+            // Slight pause before next line
+            setTimeout(processLogQueue, 40);
+          }
+        }
+
+        typeNextChar();
+      }
+
+      function handleCommand(rawCmd) {
+        const cmd = rawCmd.trim().toLowerCase();
+        if (!cmd) return;
+
+        state.commandHistory.push(rawCmd);
+        state.historyIndex = state.commandHistory.length;
+
+        // Echo user command instantly (textContent ile: girilen metin HTML'e dönüştürülmez)
+        const echoRow = document.createElement('div');
+        echoRow.className = 'term-line';
+        const echoPrefix = document.createElement('span');
+        echoPrefix.className = 'term-prefix';
+        echoPrefix.textContent = 'nexus@core-v4:~$';
+        const echoBody = document.createElement('span');
+        echoBody.textContent = ` ${rawCmd}`;
+        echoRow.appendChild(echoPrefix);
+        echoRow.appendChild(echoBody);
+        terminalScreen.appendChild(echoRow);
+        terminalScreen.scrollTop = terminalScreen.scrollHeight;
+
+        audio.keyPress();
+
+        switch (cmd) {
+          case 'help':
+            typewriterLog('SYS', 'NexusCore // Terminal komut dizini (çıktıların çoğu görsel simülasyondur):');
+            typewriterLog('INFO', '  scan          : Radar sweep animasyonu + sabit örnek vektörler');
+            typewriterLog('INFO', '  quantum_sync  : Coherence çubuğunu 99.99% animate eder (kurgu)');
+            typewriterLog('INFO', '  ai_status     : Model metriklerini yazar (tok/s, entropy, coherence)');
+            typewriterLog('INFO', '  override      : DEFCON 1 arayüz temasını etkinleştirir');
+            typewriterLog('INFO', '  threat_purge  : Kurgusal tehdit listesini temizler');
+            typewriterLog('INFO', '  throttle_max  : CPU/GPU model kaydırıcılarını son değere çeker');
+            typewriterLog('INFO', '  matrix        : Hex/ikili dekoratif çıktı basar');
+            typewriterLog('INFO', '  architect     : Enes Öztürk künyesini yazar');
+            typewriterLog('INFO', '  whoami        : Operatör etiketi basar');
+            typewriterLog('INFO', '  clear         : Terminal tamponunu temizler');
+            break;
+
+          case 'scan': {
+            audio.radarPing();
+            const flagged = state.radarNodes.filter(node => node.threat !== null);
+            typewriterLog('QNT', `SİMÜLASYON >> ${state.radarNodes.length} örnek düğüm için sweep tetiklendi (ağ çıktısı yok)...`);
+            setTimeout(() => {
+              typewriterLog('WARN', `SİMÜLASYON >> ${flagged.length} düğümde etiketli tehdit var: ${flagged.map(node => `${node.name} → ${node.threat}`).join(' · ') || 'kalmadı'}`);
+              typewriterLog('SUC', 'Radar çizimi requestAnimationFrame döngüsünde çalışmaya devam ediyor (gerçek olan kısım bu).');
+            }, 400);
+            break;
+          }
+
+          case 'quantum_sync':
+            audio.quantumChime();
+            typewriterLog('QNT', 'SİMÜLASYON >> Kuantum dolanık durum senkronize ediliyor...');
+            setTimeout(() => {
+              typewriterLog('QNT', 'SİMÜLASYON >> Faz hizalaması: alt dizi 0.002 rad.');
+            }, 200);
+            setTimeout(() => {
+              typewriterLog('QNT', 'SİMÜLASYON >> Yoğunluk matrisi uyumu %99.98.');
+            }, 400);
+            setTimeout(() => {
+              typewriterLog('SUC', 'Arayüz uyum çubuğu %99.99 değerine çekildi (ölçüm değil).');
+              state.coherence = 99.99;
+              document.getElementById('coherenceVal').textContent = '99.99%';
+              document.getElementById('coherenceBar').style.width = '100%';
+            }, 600);
+            break;
+
+          case 'ai_status':
+            audio.click();
+            typewriterLog('SYS', 'Nöral topoloji MODEL metrikleri (formül + zamanlayıcı çıktısı):');
+            typewriterLog('INFO', `Throughput (model): ${state.tokensPerSec} tok/s | Latent Dim (sabit): 8,192`);
+            typewriterLog('INFO', 'Attention heads (sabit): 64/64 | Sparsity (sabit): %92.4');
+            typewriterLog('INFO', `Entropy (rastgele): ${state.entropy} J/K | Coherence (model): ${state.coherence}%`);
+            break;
+
+          case 'override':
+            audio.breachAlarm();
+            setDefconState(1);
+            typewriterLog('BREACH', 'GÖRSEL TEMAYA GEÇİLDİ: DEFCON 1 // ACİL DURUM arayüzü.');
+            typewriterLog('BREACH', 'Bu komut yalnızca arayüzü değiştirir; hiçbir sistem yetkisi yükseltilmez.');
+            break;
+
+          case 'threat_purge':
+            audio.success();
+            purgeThreats();
+            typewriterLog('SUC', 'Kurgusal tehdit listesi arayüzden temizlendi.');
+            break;
+
+          case 'throttle_max':
+            audio.warning();
+            cpuSlider.value = 60;
+            gpuSlider.value = 3200;
+            updateHardwareMetrics();
+            typewriterLog('WARN', 'MODEL GİRDİSİ MAX: CPU 6.00 GHz // GPU 3,200 MHz (donanım etkilenmedi)');
+            typewriterLog('WARN', 'Termal model çıktısı yeniden hesaplandı.');
+            break;
+
+          case 'matrix':
+            audio.keyPress();
+            typewriterLog('SUC', 'DEKORATİF ÇIKTI: sabit hex/ikili diziler (veri sızıntısı yok)');
+            typewriterLog('SUC', '01001110 01000101 01011000 01010101 01010011 // "NEXUS"');
+            typewriterLog('SUC', '4E 65 78 75 73 43 6F 72 65 20 76 34 2E 30 // "NexusCore v4.0"');
+            break;
+
+          case 'architect':
+            audio.quantumChime();
+            typewriterLog('SYS', 'Tasarım ve kod: Enes Öztürk // NexusCore v4.0');
+            typewriterLog('SYS', 'Katkı hakları (telif) Enes Öztürk\'e aittir.');
+            typewriterLog('SYS', 'Bu arayüz tek dosyalık statik HTML: derleme hash\'i veya imzası hesaplanmaz.');
+            break;
+
+          case 'whoami':
+            typewriterLog('SYS', 'OPERATÖR ETİKETİ: Enes Öztürk (arayüzde sabit metin — kimlik doğrulaması yapılmaz)');
+            typewriterLog('SYS', '"CLEARANCE LEVEL" ibareleri dekoratiftir; gerçek yetkilendirme yoktur.');
+            break;
+
+          case 'clear':
+            terminalScreen.innerHTML = '';
+            typewriterLog('SYS', 'Terminal tamponu temizlendi. Komut bekleniyor.');
+            break;
+
+          default:
+            audio.warning();
+            typewriterLog('ERR', `Bilinmeyen komut: "${cmd}". Dizin için 'help' yazın.`);
+            break;
+        }
+      }
+
+      cliForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = cliInput.value;
+        if (val.trim()) {
+          handleCommand(val);
+          cliInput.value = '';
+        }
+      });
+
+      // Command history navigation (Up / Down)
+      cliInput.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          if (state.historyIndex > 0) {
+            state.historyIndex--;
+            cliInput.value = state.commandHistory[state.historyIndex] || '';
+          }
+        } else if (e.key === 'ArrowDown') {
+          if (state.historyIndex < state.commandHistory.length - 1) {
+            state.historyIndex++;
+            cliInput.value = state.commandHistory[state.historyIndex] || '';
+          } else {
+            state.historyIndex = state.commandHistory.length;
+            cliInput.value = '';
+          }
+        }
+      });
+
+      // Quick Command Chips Click
+      document.querySelectorAll('.cmd-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const cmd = chip.getAttribute('data-cmd');
+          handleCommand(cmd);
+        });
+      });
+
+      /* --------------------------------------------------------------------------
+         7. THREAT STREAM GENERATOR & DEFCON LOGIC
+         -------------------------------------------------------------------------- */
+      const threatStreamContainer = document.getElementById('threatStream');
+
+      function renderThreatStream() {
+        threatStreamContainer.innerHTML = '';
+        state.threatLog.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'threat-row';
+          row.dataset.threatId = item.id;
+          row.dataset.threatType = item.type;
+
+          let badgeClass = 'badge-warn';
+          if (item.type === 'breach') badgeClass = 'badge-crit';
+          if (item.type === 'sync') badgeClass = 'badge-sync';
+
+          // Sabit demo verisi bile olsa innerHTML yerine textContent kullanılır
+          const left = document.createElement('div');
+          left.style.cssText = 'display: flex; align-items: center; gap: 8px;';
+
+          const badge = document.createElement('span');
+          badge.className = `threat-badge ${badgeClass}`;
+          badge.textContent = item.label;
+
+          const text = document.createElement('span');
+          text.style.color = '#cadbee';
+          text.textContent = item.text;
+
+          const time = document.createElement('div');
+          time.style.cssText = 'color: var(--text-muted); font-size: 0.65rem;';
+          time.textContent = item.time;
+
+          left.appendChild(badge);
+          left.appendChild(text);
+          row.appendChild(left);
+          row.appendChild(time);
+          threatStreamContainer.appendChild(row);
+        });
+      }
+
+      renderThreatStream();
+
+      // Threat Radar Filter Buttons
+      const THREAT_TYPE_BY_FILTER = {
+        breach: 'Kernel Breach Attempt',
+        ddos: 'DDoS Volley',
+        quantum: 'Quantum Probe'
+      };
+
+      // Sayıları gerçekten state.radarNodes'tan hesapla: sabit yazılmış sayılar veriyle uyuşmuyordu
+      function updateFilterCounts() {
+        document.querySelectorAll('.filter-btn [data-count]').forEach(span => {
+          const filter = span.getAttribute('data-count');
+          const count = filter === 'all'
+            ? state.radarNodes.length
+            : state.radarNodes.filter(node => node.threat === THREAT_TYPE_BY_FILTER[filter]).length;
+          span.textContent = count;
+        });
+      }
+
+      updateFilterCounts();
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          audio.click();
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.threatFilter = btn.getAttribute('data-filter');
+          updateFilterCounts();
+        });
+      });
+
+      // Purge Threats Function
+      function purgeThreats() {
+        state.radarNodes.forEach(node => node.threat = null);
+        state.threatLog = [
+          { id: 'THR-0001', type: 'sync', label: 'TEMİZLENDİ', text: 'Kurgusal tehdit listesi arayüzden silindi (gerçek müdahale yok).', time: 'az önce' }
+        ];
+        renderThreatStream();
+        updateFilterCounts();
+        setDefconState(4);
+        audio.success();
+      }
+
+      document.getElementById('purgeBtn').addEventListener('click', () => {
+        purgeThreats();
+        typewriterLog('SUC', 'Kurgusal tehdit akışı arayüzden temizlendi; radar düğümü parıltıları kapatıldı.');
+      });
+
+      // DEFCON State Toggler
+      const defconBtn = document.getElementById('defconBtn');
+      const defconDot = document.getElementById('defconDot');
+      const defconText = document.getElementById('defconText');
+
+      function setDefconState(level) {
+        state.defcon = level;
+        defconBtn.classList.remove('breach');
+
+        if (level === 4) {
+          defconDot.style.background = 'var(--emerald-sync)';
+          defconBtn.style.borderColor = 'var(--emerald-sync)';
+          defconBtn.style.color = 'var(--emerald-sync)';
+          defconText.textContent = 'DEFCON 4 // NORMAL';
+        } else if (level === 3) {
+          defconDot.style.background = 'var(--cyan-neon)';
+          defconBtn.style.borderColor = 'var(--cyan-neon)';
+          defconBtn.style.color = 'var(--cyan-neon)';
+          defconText.textContent = 'DEFCON 3 // ELEVATED';
+        } else if (level === 2) {
+          defconDot.style.background = 'var(--amber-warning)';
+          defconBtn.style.borderColor = 'var(--amber-warning)';
+          defconBtn.style.color = 'var(--amber-warning)';
+          defconText.textContent = 'DEFCON 2 // GUARDED';
+        } else if (level === 1) {
+          defconBtn.classList.add('breach');
+          defconDot.style.background = 'var(--crimson-breach)';
+          defconText.textContent = 'DEFCON 1 // EMERGENCY OVERRIDE';
+        }
+      }
+
+      defconBtn.addEventListener('click', () => {
+        audio.click();
+        let next = state.defcon - 1;
+        if (next < 1) next = 4;
+        setDefconState(next);
+        typewriterLog('SYS', `DEKORATİF TEMA: DEFCON ${next} rengine geçildi (gerçek alarm durumu değişmedi).`);
+      });
+
+      /* --------------------------------------------------------------------------
+         8. TICKER'LAR & CHRONO SAAT (UTC gerçek, entropy dekoratif)
+         -------------------------------------------------------------------------- */
+      const utcChrono = document.getElementById('utcChrono');
+      const hdrEntropy = document.getElementById('hdrEntropy');
+      const uptimeCounter = document.getElementById('uptimeCounter');
+
+      setInterval(() => {
+        // UTC time
+        const now = new Date();
+        const hrs = String(now.getUTCHours()).padStart(2, '0');
+        const min = String(now.getUTCMinutes()).padStart(2, '0');
+        const sec = String(now.getUTCSeconds()).padStart(2, '0');
+        utcChrono.textContent = `${hrs}:${min}:${sec} UTC`;
+
+        // DEKORATİF: random sayı — gerçek bir entropi kaynağı okunmaz
+        state.entropy = +(0.0350 + Math.random() * 0.0080).toFixed(4);
+        hdrEntropy.textContent = `${state.entropy} ΔE`;
+        document.getElementById('entropyVal').textContent = `${state.entropy} J/K`;
+        document.getElementById('entropyBar').style.width = `${(state.entropy / 0.05) * 40}%`;
+
+        // Uptime counter
+        state.uptimeSeconds++;
+        const upH = String(Math.floor(state.uptimeSeconds / 3600)).padStart(2, '0');
+        const upM = String(Math.floor((state.uptimeSeconds % 3600) / 60)).padStart(2, '0');
+        const upS = String(state.uptimeSeconds % 60).padStart(2, '0');
+        uptimeCounter.textContent = `${upH}:${upM}:${upS}`;
+
+        // Subtle Token throughput micro-fluctuation
+        const jitter = (Math.random() - 0.5) * 3;
+        const currentTok = Math.max(100, +(state.tokensPerSec + jitter).toFixed(1));
+        document.getElementById('tokSpeedVal').textContent = `${currentTok} tok/s`;
+      }, 1000);
+
+      // Inject Neural Cycle Button
+      document.getElementById('injectPromptBtn').addEventListener('click', () => {
+        audio.quantumChime();
+        typewriterLog('QNT', 'DEMO: tok/s etiketine 384.2 yazıldı, çubuk %100’e çekildi (gerçek inference yok).');
+        const bar = document.getElementById('tokBar');
+        bar.style.width = '100%';
+        document.getElementById('tokSpeedVal').textContent = '384.2 tok/s';
+        setTimeout(() => {
+          updateHardwareMetrics();
+        }, 1200);
+      });
+
+      /* --------------------------------------------------------------------------
+         9. CONTROLS: AUDIO, SCANLINES, EXPORT, DOSSIER MODAL
+         -------------------------------------------------------------------------- */
+      // Audio toggle
+      const audioToggleBtn = document.getElementById('audioToggleBtn');
+      const audioIcon = document.getElementById('audioIcon');
+      const audioText = document.getElementById('audioText');
+
+      audioToggleBtn.addEventListener('click', () => {
+        audio.enabled = !audio.enabled;
+        if (audio.enabled) {
+          audio.initContext();
+          audio.click();
+          audioIcon.textContent = '🔊';
+          audioText.textContent = 'AUDIO: ON';
+          audioToggleBtn.classList.remove('btn-cyber-danger');
+        } else {
+          audioIcon.textContent = '🔇';
+          audioText.textContent = 'AUDIO: OFF';
+          audioToggleBtn.classList.add('btn-cyber-danger');
+        }
+      });
+
+      // Scanlines toggle
+      const scanlines = document.getElementById('scanlines');
+      const scanlinesToggleBtn = document.getElementById('scanlinesToggleBtn');
+
+      scanlinesToggleBtn.addEventListener('click', () => {
+        audio.click();
+        state.scanlines = !state.scanlines;
+        if (state.scanlines) {
+          scanlines.classList.remove('disabled');
+          scanlinesToggleBtn.classList.add('active');
+        } else {
+          scanlines.classList.add('disabled');
+          scanlinesToggleBtn.classList.remove('active');
+        }
+      });
+
+      // System Specs Modal
+      const specsModal = document.getElementById('specsModal');
+      const openSpecsBtn = document.getElementById('openSpecsBtn');
+      const closeSpecsBtn = document.getElementById('closeSpecsBtn');
+      const modalDismissBtn = document.getElementById('modalDismissBtn');
+
+      function openModal() {
+        audio.click();
+        specsModal.classList.add('open');
+      }
+
+      function closeModal() {
+        audio.click();
+        specsModal.classList.remove('open');
+      }
+
+      openSpecsBtn.addEventListener('click', openModal);
+      closeSpecsBtn.addEventListener('click', closeModal);
+      modalDismissBtn.addEventListener('click', closeModal);
+      specsModal.addEventListener('click', (e) => {
+        if (e.target === specsModal) closeModal();
+      });
+
+      // Export Standalone Single-File HTML
+      function exportStandaloneHTML() {
+        audio.success();
+        const htmlContent = '<!doctype html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nexuscore-v4-arayuz.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        typewriterLog('SUC', 'Dışa aktarım: o anki DOM tek .html dosyasına yazıldı (terminal geçmişi sabit metin olarak kopyalanır).');
+      }
+
+      document.getElementById('exportBtn').addEventListener('click', exportStandaloneHTML);
+      document.getElementById('footerExportBtn').addEventListener('click', exportStandaloneHTML);
+    </script>
+  </body>
+</html>

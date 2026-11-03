@@ -1,0 +1,17 @@
+{
+  "name": "nexuscore-quantum-terminal",
+  "private": true,
+  "version": "4.0.0",
+  "description": "NexusCore AI Quantum Terminal & Threat Visualizer - tek dosyalik statik uygulama (Enes Ozturk)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --port=3000",
+    "clean": "rm -rf dist",
+    "check": "node tools/check_inline_html.mjs index.html"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
