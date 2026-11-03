@@ -94,13 +94,13 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
 ## Kanıt zinciri
 
 Son doğrulama, `main` dalından yeni alınmış bir klon üzerinde yapıldı (bu satırlar yazıldığında
-`578e2b5`):
+`3a01912`):
 
 | Adım | Komut | Sonuç |
 |---|---|---|
-| Klon | `git clone --depth 1 …` | `HEAD = 578e2b5`, 100 izlenen dosya |
+| Klon | `git clone --depth 1 …` | `HEAD = 3a01912`, 102 izlenen dosya |
 | Kök dosyalar | `ls LICENSE NOTICE .gitattributes` | üçü de depoda; GitHub sayfası "Apache-2.0" diyor |
-| Kapaklar | `git ls-files \| grep cover.png` | 4 SVG + 4 PNG (1280×640) |
+| Kapaklar | `git ls-files \| grep cover.png` | 5 SVG + 5 PNG, beşi de 1280×640 |
 | NexusCore denetim | `node tools/check_inline_html.mjs index.html` | 95.468 karakter / 2.483 satır, 0 hata, 0 eksik id, 0 çift id |
 | NexusCore derleme | `npm install && npm run build` | 43,54 kB HTML + 21,38 kB JS |
 | AuraSync derleme | `npm install && npm run lint && npm run build` | `tsc --noEmit` 0 hata; 292,18 kB JS / 46,21 kB CSS |
