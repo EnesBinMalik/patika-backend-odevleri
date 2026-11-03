@@ -124,9 +124,12 @@ Tarayıcıda doğrulananlar (Chrome, `vite preview`):
 
 - `navigator.getBattery()` bu testte **`HARDWARE_API`** kaynağını döndürdü; halkanın `SRC:` etiketi
   buna göre değişiyor (API'siz tarayıcıda `DEMO_DEGERLER`).
-- Eğim kaynağı etiketi olay gelmeden `BEKLENIOR`, imleç hareketiyle `IMLEÇ` oldu — sensör
-  taklidiyle gerçek sensör karıştırılmıyor.
+- Eğim kaynağı etiketi olay gelmeden `BEKLENIYOR`, imleç hareketiyle `İMLEÇ` oldu — sensör
+  taklidiyle gerçek sensör karıştırılmıyor (etiket metinleri: `CyberControlsWidget.tsx:188`).
 - `scan` çıktıları gerçek: localStorage yaz/ok başarılı, AudioContext var, viewport + DPR okundu.
+- **Temiz klon kanıtı**: `main` dalından yeni bir klonlama (`git clone --depth 1`) üzerinde
+  `npm install` → 43 paket, `npm run lint` → 0 hata, `npm run build` → yukarıdaki üç boyut
+  birebir aynı. `src/` bu klonda 2.750 satır ve 14/14 dosya telif başlığını taşıyor.
 - Ağ kaydı yalnızca `fonts.googleapis.com` (1 CSS) + `fonts.gstatic.com` (woff2) + yerel asset'ler.
 - 632 px genişlikte yatay taşma yok; konsol hatası yok.
 

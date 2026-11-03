@@ -113,6 +113,11 @@ Denetleyici üç şeyi arar: inline `<script>` bloğunun söz dizimi (`node:vm` 
 `getElementById`/`querySelector('#…')` ile istenen her `id`'nin HTML'de gerçekten tanımlı olması,
 ve çift `id`. Bu tarama, elle bakmanın kaçırdığı "buton var, handler'ı yok" tipi kırıkları kapatıyor.
 
+Yukarıdaki blok `main` dalından yeni alınmış bir klonun (`git clone --depth 1`) çıktısıdır.
+Kök `.gitattributes` metin dosyalarını LF'te tuttuğu için Windows klonunda da aynı sayılar
+çıkar; LF olmayan bir checkout 95.468 yerine 97.950 karakter ve 43,54 kB yerine 43,99 kB
+üretir — fark yalnızca satır sonu karakterleridir, kod değişmez.
+
 Tarayıcıda doğrulananlar:
 
 - `scan` komutu artık gerçek veri sayısını yazıyor: `4 düğümde etiketli tehdit var` + düğüm adları.

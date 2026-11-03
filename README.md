@@ -88,6 +88,24 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
 
 Ödevleri değerlendirirken o klasörün **son bölümünü önce okuyun**.
 
+## Kanıt zinciri
+
+Son doğrulama, `main` dalından yeni alınmış bir klon üzerinde yapıldı (bu satırlar yazıldığında
+`e5ba931`):
+
+| Adım | Komut | Sonuç |
+|---|---|---|
+| Klon | `git clone --depth 1 …` | `HEAD = e5ba931`, 100 izlenen dosya |
+| Kök dosyalar | `ls LICENSE NOTICE .gitattributes` | üçü de depoda; GitHub sayfası "Apache-2.0" diyor |
+| Kapaklar | `git ls-files \| grep cover.png` | 4 SVG + 4 PNG (1280×640) |
+| NexusCore denetim | `node tools/check_inline_html.mjs index.html` | 95.468 karakter / 2.483 satır, 0 hata, 0 eksik id, 0 çift id |
+| NexusCore derleme | `npm install && npm run build` | 43,54 kB HTML + 21,38 kB JS |
+| AuraSync derleme | `npm install && npm run lint && npm run build` | `tsc --noEmit` 0 hata; 292,18 kB JS / 46,21 kB CSS |
+| Telif kapsamı | `NOTICE` içindeki komut | 58 kaynak dosyanın 17'sinde SPDX başlığı |
+
+Klon `--depth 1` ile alındığı için geçmiş commit'ler burada değil; zincirin tamamı
+`git log origin/main` ve GitHub'ın commit sayfasında görülüyor.
+
 ## Görsel standartları
 
 - Her ödevin kapağı `<ödev>/docs/cover.svg` içinde **elle yazılmış vektördür**; jenerik AI
