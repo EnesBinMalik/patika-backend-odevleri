@@ -2,6 +2,8 @@
 
 # Patika Backend Ödevleri
 
+<img src="docs/repo-cover.svg" width="1200" alt="Depo kapağı: 100 izlenen dosya, 1365 satır Move, 8 Move testi, 17/58 SPDX başlığı; dört ödevin kendi kapak sayılarıyla kartları, lisans ve düzen notu" />
+
 [Patika](https://patika.dev) backend yolculuğundaki ödev ve projelerin **depo kökü**.
 Her ödev kendi klasöründe; blokzincir, GraphQL, Node ve mimari refaktör işleri — artık arayüz
 mühendisliği çıktıları da — burada toplanır.
@@ -71,6 +73,7 @@ patika-backend-odevleri/
 │   ├── tools/check_inline_html.mjs ← kendi denetleyici: söz dizimi, eksik id, çift id
 │   ├── docs/cover.svg      ← ödevin özel kapağı (elle yazılmış vektör)
 │   └── README.md           ← §5'te veri kaynağı etiketleri, §6'da doğrulama çıktısı
+├── docs/repo-cover.svg|.png ← depo kapağı: sosyal önizleme için 1280×640 (SVG elle, PNG ondan türeme)
 ├── LICENSE                   ← Apache-2.0: apache.org'dan birebir indirilmiş metin (SHA-256 §"İmza ve haklar")
 ├── NOTICE                    ← telif beyanı, üçüncü taraf varlıklar, SPDX kapsamı (17/58) ve ölçüm komutu
 ├── .gitattributes            ← metin dosyalarında LF standardı: ölçümler platformdan bağımsız kalır
@@ -91,11 +94,11 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
 ## Kanıt zinciri
 
 Son doğrulama, `main` dalından yeni alınmış bir klon üzerinde yapıldı (bu satırlar yazıldığında
-`e5ba931`):
+`578e2b5`):
 
 | Adım | Komut | Sonuç |
 |---|---|---|
-| Klon | `git clone --depth 1 …` | `HEAD = e5ba931`, 100 izlenen dosya |
+| Klon | `git clone --depth 1 …` | `HEAD = 578e2b5`, 100 izlenen dosya |
 | Kök dosyalar | `ls LICENSE NOTICE .gitattributes` | üçü de depoda; GitHub sayfası "Apache-2.0" diyor |
 | Kapaklar | `git ls-files \| grep cover.png` | 4 SVG + 4 PNG (1280×640) |
 | NexusCore denetim | `node tools/check_inline_html.mjs index.html` | 95.468 karakter / 2.483 satır, 0 hata, 0 eksik id, 0 çift id |
@@ -115,6 +118,9 @@ Klon `--depth 1` ile alındığı için geçmiş commit'ler burada değil; zinci
   `@resvg/resvg-js` ile türetilmiştir (araç depoya bağımlılık olarak eklenmez, geçici dizinde
   kurulur). GitHub **Settings → Social preview** için doğrudan bu dosya yüklenir; SVG değişirse
   PNG yeniden üretilir.
+- Depo **kapak görseli** (sosyal önizleme) `docs/repo-cover.svg` / `docs/repo-cover.png`
+  dosyasındadır: GitHub Settings → Social preview için 1280×640 PNG olanı yükleyin. Üzerindeki
+  her sayı bu README'deki "Kanıt zinciri" tablosuyla aynı kaynaktan gelir.
 
 ## İmza ve haklar
 

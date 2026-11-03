@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-labelledby="t d">
+  <title id="t">Patika Backend Ödevleri - Enes Öztürk imzali dort backend ciktisi</title>
+  <desc id="d">Kapak: solda depo basi ve olculen kurl sayilari, sagda dort odevin kendi kapisindan dogrulanan istatistikleri, altta lisans ve duzen notu.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050b16"/>
+      <stop offset="0.5" stop-color="#0a1122"/>
+      <stop offset="1" stop-color="#0a1613"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.055"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#94a3b8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <circle cx="1180" cy="70" r="300" fill="url(#glowA)"/>
+  <circle cx="120" cy="600" r="270" fill="url(#glowB)"/>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace">
+    <text x="72" y="80" font-size="15" fill="#2dd4bf" letter-spacing="4">PATIKA · BACKEND ÖDEVLERİ</text>
+    <text x="72" y="106" font-size="13" fill="#64748b" letter-spacing="1">MOVE 2 / APTOS FRAMEWORK · REACT 19 / VITE 8 · TEK DOSYA HTML</text>
+  </g>
+
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="72" y="176" font-size="46" font-weight="700" fill="#f8fafc">Patika Backend</text>
+    <text x="72" y="220" font-size="36" font-weight="700" fill="url(#accent)">Ödevleri</text>
+    <text x="72" y="256" font-size="19" fill="#cbd5e1">Dort odev · ikisi Move sozlesme, ikisi tarayici arayuzu</text>
+    <text x="72" y="282" font-size="16" fill="#7c8ba1">Her iddia kaynak koda ve temiz klon ciktisina karsi kontrol edilmistir</text>
+  </g>
+
+  <rect x="72" y="302" width="452" height="1" fill="url(#accent)" opacity="0.5"/>
+
+  <g>
+    <g transform="translate(72,326)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#2dd4bf" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#2dd4bf">100</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">izlenen dosya</text>
+    </g>
+    <g transform="translate(188,326)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="24" font-weight="700" fill="#38bdf8">1365</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">satir Move</text>
+    </g>
+    <g transform="translate(304,326)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.32"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="27" font-weight="700" fill="#a3e635">8</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">Move testi</text>
+    </g>
+    <g transform="translate(420,326)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="24" font-weight="700" fill="#fbbf24">17/58</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">SPDX basligi</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#64748b">
+    <text x="72" y="436">Move: 602 (vault) + 763 (trustescrow) satir · 19 hata kodu</text>
+    <text x="72" y="458">Arayuz: 2.750 satir src (AuraSync) + 2.483 satir index.html</text>
+  </g>
+
+  <rect x="72" y="482" width="452" height="112" rx="12" fill="#0f172a" stroke="#2dd4bf" stroke-opacity="0.4"/>
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="92" y="510" font-size="14" font-weight="700" fill="#2dd4bf">LİSANS VE İMZA</text>
+    <text x="92" y="536" font-size="13" fill="#cbd5e1">LICENSE: Apache-2.0, apache.org'dan birebir</text>
+    <text x="92" y="556" font-size="13" fill="#cbd5e1">(202 satir / 11.358 bayt / SHA-256 cfc7749b...)</text>
+    <text x="92" y="576" font-size="13" fill="#cbd5e1">NOTICE: telif beyani + ucuncu taraf varliklar</text>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace">
+    <text x="600" y="112" font-size="14" fill="#94a3b8" letter-spacing="2">DÖRT ÖDEV · KENDI KAPAGINDAKI SAYILAR</text>
+
+    <rect x="600" y="128" width="300" height="112" rx="12" fill="url(#card)" stroke="#2dd4bf" stroke-opacity="0.45"/>
+    <text x="620" y="158" font-size="16" font-weight="700" fill="#e2e8f0">Aptos Vault Move v2</text>
+    <text x="620" y="182" font-size="12" fill="#5eead4">311 satir vault.move · 7 hata kodu</text>
+    <text x="620" y="202" font-size="12" fill="#94a3b8">6 birim test · 15 assert! testte</text>
+    <text x="620" y="222" font-size="12" fill="#94a3b8">dogrudan vault_address mimarisi</text>
+
+    <rect x="920" y="128" width="300" height="112" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.45"/>
+    <text x="940" y="158" font-size="16" font-weight="700" fill="#e2e8f0">Aptos TrustEscrow</text>
+    <text x="940" y="182" font-size="12" fill="#7dd3fc">600 satir Move · 7 entry + 2 view</text>
+    <text x="940" y="202" font-size="12" fill="#94a3b8">12 hata kodu · 28 assert! · 2 test</text>
+    <text x="940" y="222" font-size="12" fill="#94a3b8">14 sozlesme kusuru belgelendi</text>
+
+    <rect x="600" y="256" width="300" height="112" rx="12" fill="url(#card)" stroke="#b000ff" stroke-opacity="0.45"/>
+    <text x="620" y="286" font-size="16" font-weight="700" fill="#e2e8f0">AuraSync OS</text>
+    <text x="620" y="310" font-size="12" fill="#d8b4fe">2.750 satir src · 13 TS/TSX dosya</text>
+    <text x="620" y="330" font-size="12" fill="#94a3b8">9 bilesen · 10 terminal komutu</text>
+    <text x="620" y="350" font-size="12" fill="#94a3b8">0 fetch/WS · build 292,18 kB JS</text>
+
+    <rect x="920" y="256" width="300" height="112" rx="12" fill="url(#card)" stroke="#fb7185" stroke-opacity="0.45"/>
+    <text x="940" y="286" font-size="16" font-weight="700" fill="#e2e8f0">NexusCore Terminal</text>
+    <text x="940" y="310" font-size="12" fill="#fda4af">2.483 satir · tek dosya HTML</text>
+    <text x="940" y="330" font-size="12" fill="#94a3b8">11 CLI komutu · 51 id · 0 kirik id</text>
+    <text x="940" y="350" font-size="12" fill="#94a3b8">XSS: innerHTML → textContent</text>
+
+    <rect x="600" y="384" width="620" height="72" rx="12" fill="#0f172a" stroke="#fbbf24" stroke-opacity="0.4"/>
+    <text x="620" y="412" font-size="13" font-weight="700" fill="#fbbf24" font-family="'Segoe UI', Arial, sans-serif">DUZEN NOTU</text>
+    <text x="620" y="436" font-size="12" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif">Arayuz odevlerinde veri KURGUDUR, Move odevlerinde zincire islem</text>
+    <text x="620" y="452" font-size="12" fill="#cbd5e1" font-family="'Segoe UI', Arial, sans-serif">gonderilmez · Move kaynaklari derlenmemistir, test sayilari kaynak sayimidir.</text>
+
+    <g font-size="12" fill="#475569">
+      <text x="600" y="500">Temiz klon dogrulamasi (main, depth=1):</text>
+      <text x="600" y="522">  nexuscore → 95.468 karakter / 2.483 satir · dist 43,54 kB + 21,38 kB</text>
+      <text x="600" y="544">  aurasync  → tsc 0 hata · 1.671 modul · 292,18 kB JS / 46,21 kB CSS</text>
+      <text x="600" y="566">  kapaklar  → 4 SVG + 4 PNG (1280x640, resvg ile SVG'den turetildi)</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#475569">
+    <text x="72" y="620">Enes Öztürk · patika-backend-odevleri · tasarim ve kod bende</text>
+    <text x="1208" y="620" text-anchor="end">olculen sayi yoksa kapakta da yok</text>
+  </g>
+</svg>
