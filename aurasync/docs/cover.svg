@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-labelledby="t d">
+  <title id="t">AuraSync - Mobile Cyber-Glass OS</title>
+  <desc id="d">Kapak gorseli: solda proje basi ve kaynak koddan dogrulanmis istatistik kartlari, sagda tarayici API'lerinin hangi widget'i besledigini gosteren veri akis semasi ve "gercek / simülasyon" sinir karti.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05050a"/>
+      <stop offset="0.5" stop-color="#0a0f1f"/>
+      <stop offset="1" stop-color="#0d0718"/>
+    </linearGradient>
+    <radialGradient id="glowCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00f3ff" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#00f3ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#b000ff" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#b000ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00f3ff"/>
+      <stop offset="1" stop-color="#b000ff"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.055"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#94a3b8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowCyan" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#00f3ff"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#fbbf24"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <circle cx="1160" cy="70" r="300" fill="url(#glowCyan)"/>
+  <circle cx="120" cy="600" r="260" fill="url(#glowViolet)"/>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace">
+    <text x="72" y="84" font-size="15" fill="#00f3ff" letter-spacing="4">PATIKA · ARAYUZ MUHENDISLIGI CIKISI</text>
+    <text x="72" y="110" font-size="14" fill="#64748b" letter-spacing="1">REACT 19 / VITE 8 / TAILWIND 4 / CANVAS 2D / WEB AUDIO</text>
+  </g>
+
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="72" y="184" font-size="48" font-weight="700" fill="#f8fafc">AuraSync</text>
+    <text x="72" y="228" font-size="34" font-weight="700" fill="url(#accent)">Mobile Cyber-Glass OS</text>
+    <text x="72" y="266" font-size="19" fill="#cbd5e1">Mobil-onceliklik cam HUD: batarya halkasi, egim 3D, notlar, terminal</text>
+    <text x="72" y="292" font-size="16" fill="#7c8ba1">Sunucuya veri gitmez · tek dis kaynak Google Fonts (4 aile)</text>
+  </g>
+
+  <rect x="72" y="312" width="452" height="1" fill="url(#accent)" opacity="0.5"/>
+
+  <g>
+    <g transform="translate(72,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#00f3ff" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#00f3ff">2687</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">satir src</text>
+    </g>
+    <g transform="translate(188,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#38bdf8">13</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">TS/TSX dosya</text>
+    </g>
+    <g transform="translate(304,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.32"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#a3e635">10</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">terminal komutu</text>
+    </g>
+    <g transform="translate(420,336)">
+      <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.35"/>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#fbbf24">0</text>
+      <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">fetch / WS</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#64748b">
+    <text x="72" y="446">build 1671 modul · JS 292,18 kB (gzip 88,26) · CSS 46,21 kB (gzip 8,23)</text>
+    <text x="72" y="468">4 localStorage anahtari · standalone .html 751 satir / 5 komut</text>
+  </g>
+
+  <rect x="72" y="492" width="452" height="104" rx="12" fill="#0f172a" stroke="#fbbf24" stroke-opacity="0.45"/>
+  <g font-family="'Segoe UI', 'DejaVu Sans', Arial, sans-serif">
+    <text x="92" y="520" font-size="14" font-weight="700" fill="#fbbf24">GERCEK / SIMULASYON SINIRI</text>
+    <text x="92" y="546" font-size="13" fill="#cbd5e1">Gercek: navigator.getBattery(), deviceorientation,</text>
+    <text x="92" y="566" font-size="13" fill="#cbd5e1">Web Audio osilatorleri, rAF canvas, localStorage, UTC oturum.</text>
+    <text x="92" y="586" font-size="13" fill="#cbd5e1">Kurgu: AES sifreleme, Mbps/ms kaybi, relay agi, RF taramasi.</text>
+  </g>
+
+  <g>
+    <text x="600" y="120" font-family="Consolas, monospace" font-size="14" fill="#94a3b8" letter-spacing="2">BROWSER API → WIDGET HARITASI</text>
+
+    <rect x="600" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#00f3ff" stroke-opacity="0.5"/>
+    <text x="706" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">navigator.getBattery()</text>
+    <text x="706" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">HARDWARE_API · levelchange dinleyici</text>
+
+    <rect x="860" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.5"/>
+    <text x="966" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">PowerRingWidget</text>
+    <text x="966" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#bef264">SRC: HARDWARE_API / DEMO_DEGER</text>
+
+    <path d="M812 176H852" stroke="#00f3ff" stroke-width="2" marker-end="url(#arrowCyan)"/>
+
+    <rect x="600" y="266" width="212" height="72" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="706" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#e2e8f0">deviceorientation</text>
+    <text x="706" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">iOS requestPermission · source: sensor</text>
+
+    <rect x="860" y="266" width="212" height="72" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.5"/>
+    <text x="966" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">3D tilt HUD</text>
+    <text x="966" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">source: pointer → IMLEÇ etiketi</text>
+
+    <path d="M812 302H852" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowCyan)"/>
+
+    <rect x="600" y="392" width="212" height="72" rx="12" fill="url(#card)" stroke="#b000ff" stroke-opacity="0.55"/>
+    <text x="706" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">Canvas 2D + rAF</text>
+    <text x="706" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#d8b4fe">olcutulan RENDER FPS · veri SİM</text>
+
+    <rect x="860" y="392" width="212" height="72" rx="12" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.55"/>
+    <text x="966" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">DataStreamCanvas</text>
+    <text x="966" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fcd34d">Throughput/Latency/Loss = SİM</text>
+
+    <path d="M812 428H852" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+    <rect x="600" y="518" width="472" height="58" rx="12" fill="#0f172a" stroke="#00f3ff" stroke-opacity="0.35"/>
+    <text x="836" y="543" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#7dd3fc">TerminalDrawer "scan" → gercek ozellik taramasi</text>
+    <text x="836" y="563" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#94a3b8">localStorage yaz/ok testi · Battery/Orientation/AudioContext varligi</text>
+
+    <g font-family="Consolas, monospace" font-size="12" fill="#475569">
+      <text x="1100" y="180">9 bilesen</text>
+      <text x="1100" y="202">1 hook</text>
+      <text x="1100" y="224">1 servis</text>
+      <text x="1100" y="246">4 yazi tipi</text>
+    </g>
+  </g>
+
+  <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#475569">
+    <text x="72" y="620">Enes Ozturk · patika-backend-odevleri/aurasync</text>
+    <text x="1208" y="620" text-anchor="end">sifreleme YOK · veriler tarayicida duz metin</text>
+  </g>
+</svg>

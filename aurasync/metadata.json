@@ -1,0 +1,6 @@
+{
+  "name": "AuraSync // Mobile Cyber-Glass OS",
+  "description": "AuraSync Mobile Cyber-Glass OS — Enes Öztürk imzalı tarayıcı demosu. Gerçek: navigator.getBattery(), deviceorientation, localStorage, Web Audio osilatörleri, Canvas 2D animasyonu. Dekoratif: terminal çıktıları ve telemetri rakamları. Veri/ağ API'si çağrısı yoktur; tek dış kaynak Google Fonts yazı tipleridir (fontlar öntanımlı sistem yazı tiplerine düşer). Gemini veya sunucu anahtarı kullanılmaz.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --cyber-cyan: #00f3ff;
+    --cyber-emerald: #00ff66;
+    --cyber-magenta: #ff007f;
+    --cyber-amber: #ffb800;
+    --cyber-bg: #05050a;
+    --cyber-glass: rgba(12, 17, 30, 0.65);
+    --cyber-border: rgba(0, 243, 255, 0.2);
+    --cyber-glow-cyan: 0 0 20px rgba(0, 243, 255, 0.35);
+    --cyber-glow-emerald: 0 0 20px rgba(0, 255, 102, 0.35);
+  }
+
+  html, body {
+    background-color: #05050a;
+    color: #e2e8f0;
+    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', monospace;
+}
+
+.font-mono-tech {
+  font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+}
+
+/* Glassmorphism cyber surface */
+.cyber-glass {
+  background: rgba(12, 18, 30, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 243, 255, 0.16);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.03);
+}
+
+.cyber-glass-emerald {
+  background: rgba(8, 22, 18, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 255, 102, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 255, 102, 0.03);
+}
+
+.cyber-glass-interactive {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cyber-glass-interactive:hover {
+  border-color: rgba(0, 243, 255, 0.45);
+  box-shadow: 0 10px 35px 0 rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(0, 243, 255, 0.06);
+}
+
+/* Subtle Matrix / Cyber Grid */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 243, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 243, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Optional CRT Scanlines */
+.scanlines-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Glowing text helpers */
+.neon-text-cyan {
+  color: #00f3ff;
+  text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+}
+
+.neon-text-emerald {
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+/* Cyber corner cuts */
+.corner-cut {
+  clip-path: polygon(
+    0 10px, 
+    10px 0, 
+    100% 0, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    0 100%
+  );
+}
+
+/* Safe area inset padding */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 12px);
+}
+
+/* Hide scrollbar for clean mobile HUD */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
