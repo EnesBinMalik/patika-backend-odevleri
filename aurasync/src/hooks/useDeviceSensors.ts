@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 // Battery Status API TypeScript DOM lib'inde tanımlı değil; gerekli alanları kendimiz bildiriyoruz.

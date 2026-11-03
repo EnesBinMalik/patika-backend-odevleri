@@ -144,7 +144,10 @@ Tarayıcıda doğrulananlar:
 ## 9. Telif ve imza
 
 Bu çalışmanın tasarımı ve kodu **Enes Öztürk**'e aittir; katkı hakları (telif) saklıdır.
-Kaynak dosyalar `SPDX-License-Identifier: Apache-2.0` başlığıyla dağıtılır.
+Bu klasördeki yardımcı dosyalar (`vite.config.ts`, `tools/check_inline_html.mjs`)
+`SPDX-License-Identifier: Apache-2.0` başlığını taşır; tek dosyalık `index.html`
+beyanı `<head>` içindeki meta etiketleriyle verir (satır 11–12) ve altbilgide de yazar
+satırı vardır. Depo kökündeki `LICENSE` ve `NOTICE` bu klasörün tamamını kapsar.
 Arayüz künyesi (`index.html` altbilgi ve `SYSTEM SPECS` dökümanı) yazar beyanını içerir:
 
 ```

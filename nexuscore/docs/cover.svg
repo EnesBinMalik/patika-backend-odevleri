@@ -95,7 +95,7 @@
 
     <rect x="600" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#00f3ff" stroke-opacity="0.5"/>
     <text x="706" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">radarNodes[8]</text>
-    <text x="706" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">koddaki sabit ornek · filtre sayilari</text>
+    <text x="706" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">sabit ornek → filtre sayisi</text>
 
     <rect x="860" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.5"/>
     <text x="966" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#e2e8f0">TUM DUGUMLER (8)</text>
@@ -109,7 +109,7 @@
 
     <rect x="860" y="266" width="212" height="72" rx="12" fill="url(#card)" stroke="#b000ff" stroke-opacity="0.55"/>
     <text x="966" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#e2e8f0">donanim okunmaz</text>
-    <text x="966" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#d8b4fe">MODEL GIRDISI etiketi + tooltip</text>
+    <text x="966" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#d8b4fe">MODEL GIRDISI + tooltip</text>
 
     <path d="M812 302H852" stroke="#b000ff" stroke-width="2" marker-end="url(#arrowCyan)"/>
 

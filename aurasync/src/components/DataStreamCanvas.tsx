@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import React, { useEffect, useRef, useState } from 'react';
 import { soundFx } from '../services/soundFx';
 import { Activity, Radio, BarChart3 } from 'lucide-react';

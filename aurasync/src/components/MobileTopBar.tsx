@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import React from 'react';
 import { soundFx } from '../services/soundFx';
 import { Volume2, VolumeX, Compass, Eye, Shield, Radio } from 'lucide-react';

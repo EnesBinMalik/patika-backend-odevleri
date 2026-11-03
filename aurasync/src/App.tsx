@@ -16,6 +16,10 @@
  * - Terminal çıktıları (status/sync/scan/decrypt), throughput/latency/packet rakamları
  * - "Overclock" kaydırıcısı yalnızca canvas animasyon hızını değiştirir
  * - Neural Mesh / Shield Matrix anahtarları görseldir, gerçek ağ veya güvenlik işlevi yoktur
+ *
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 import React, { useState, useEffect } from 'react';

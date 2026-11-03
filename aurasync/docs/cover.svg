@@ -57,7 +57,7 @@
   <g>
     <g transform="translate(72,336)">
       <rect width="104" height="80" rx="12" fill="url(#card)" stroke="#00f3ff" stroke-opacity="0.35"/>
-      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#00f3ff">2687</text>
+      <text x="52" y="38" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#00f3ff">2750</text>
       <text x="52" y="60" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#94a3b8">satir src</text>
     </g>
     <g transform="translate(188,336)">
@@ -95,37 +95,37 @@
 
     <rect x="600" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#00f3ff" stroke-opacity="0.5"/>
     <text x="706" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">navigator.getBattery()</text>
-    <text x="706" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">HARDWARE_API · levelchange dinleyici</text>
+    <text x="706" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">HARDWARE_API · levelchange</text>
 
     <rect x="860" y="140" width="212" height="72" rx="12" fill="url(#card)" stroke="#a3e635" stroke-opacity="0.5"/>
     <text x="966" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">PowerRingWidget</text>
-    <text x="966" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#bef264">SRC: HARDWARE_API / DEMO_DEGER</text>
+    <text x="966" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#bef264">SRC: API / DEMO_DEGERLER</text>
 
     <path d="M812 176H852" stroke="#00f3ff" stroke-width="2" marker-end="url(#arrowCyan)"/>
 
     <rect x="600" y="266" width="212" height="72" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.5"/>
     <text x="706" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="14" font-weight="700" fill="#e2e8f0">deviceorientation</text>
-    <text x="706" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">iOS requestPermission · source: sensor</text>
+    <text x="706" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">iOS requestPermission()</text>
 
     <rect x="860" y="266" width="212" height="72" rx="12" fill="url(#card)" stroke="#38bdf8" stroke-opacity="0.5"/>
     <text x="966" y="296" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">3D tilt HUD</text>
-    <text x="966" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">source: pointer → IMLEÇ etiketi</text>
+    <text x="966" y="318" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#7dd3fc">pointer → IMLEÇ etiketi</text>
 
     <path d="M812 302H852" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowCyan)"/>
 
     <rect x="600" y="392" width="212" height="72" rx="12" fill="url(#card)" stroke="#b000ff" stroke-opacity="0.55"/>
     <text x="706" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">Canvas 2D + rAF</text>
-    <text x="706" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#d8b4fe">olcutulan RENDER FPS · veri SİM</text>
+    <text x="706" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#d8b4fe">gerçek RENDER FPS</text>
 
     <rect x="860" y="392" width="212" height="72" rx="12" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.55"/>
     <text x="966" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">DataStreamCanvas</text>
-    <text x="966" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fcd34d">Throughput/Latency/Loss = SİM</text>
+    <text x="966" y="444" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fcd34d">KPI = SİMÜLASYON</text>
 
     <path d="M812 428H852" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrowAmber)"/>
 
     <rect x="600" y="518" width="472" height="58" rx="12" fill="#0f172a" stroke="#00f3ff" stroke-opacity="0.35"/>
-    <text x="836" y="543" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#7dd3fc">TerminalDrawer "scan" → gercek ozellik taramasi</text>
-    <text x="836" y="563" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#94a3b8">localStorage yaz/ok testi · Battery/Orientation/AudioContext varligi</text>
+    <text x="836" y="543" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#7dd3fc">TerminalDrawer "scan" → gerçek özellik taraması</text>
+    <text x="836" y="563" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#94a3b8">localStorage yaz/ok · API varlık kontrolü</text>
 
     <g font-family="Consolas, monospace" font-size="12" fill="#475569">
       <text x="1100" y="180">9 bilesen</text>
@@ -136,7 +136,7 @@
   </g>
 
   <g font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#475569">
-    <text x="72" y="620">Enes Ozturk · patika-backend-odevleri/aurasync</text>
+    <text x="72" y="620">Enes Ozturk · patika-backend-odevleri/aurasync · src/ 14/14 dosyada Copyright + SPDX Apache-2.0</text>
     <text x="1208" y="620" text-anchor="end">sifreleme YOK · veriler tarayicida duz metin</text>
   </g>
 </svg>

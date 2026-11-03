@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import React from 'react';
 import { soundFx } from '../services/soundFx';
 import { LayoutDashboard, Activity, FileText, Award, Terminal as TerminalIcon } from 'lucide-react';

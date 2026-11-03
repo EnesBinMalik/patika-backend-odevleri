@@ -4,7 +4,7 @@
 
 ![Ödev](https://img.shields.io/badge/patika-arayüz_çıkışı-22D3EE?style=flat-square)
 ![Yığın](https://img.shields.io/badge/React_19·Vite_8·Tailwind_4-A78BFA?style=flat-square)
-![Kod](https://img.shields.io/badge/2.687_satır-13_dosya-34D399?style=flat-square)
+![Kod](https://img.shields.io/badge/2.750_satır-13_dosya-34D399?style=flat-square)
 ![Ağ](https://img.shields.io/badge/fetch_0·WebSocket_0-FBBF24?style=flat-square)
 
 <img src="docs/cover.svg" width="1280" height="640" alt="AuraSync kapak görseli: solda doğrulanmış sayılar, sağda tarayıcı API → widget haritası ve gerçek/simülasyon sınırı" />
@@ -51,8 +51,8 @@ ile çakışan eski pin `npm install`'ı `ERESOLVE` ile durduruyordu.
 aurasync/
 ├── index.html                     ← 22 satır: meta + Google Fonts (4 aile) + #root
 ├── src/
-│   ├── App.tsx (277)              ← HUD yerleşimi; başlıkta GERÇEK/DEKORATİF listesi
-│   ├── components/                ← 9 bileşen, 1.958 satır
+│   ├── App.tsx (281)              ← HUD yerleşimi; başlıkta GERÇEK/DEKORATİF listesi
+│   ├── components/                ← 9 bileşen, 2.003 satır
 │   │   ├── MobileTopBar.tsx       ← DECOR çipi, GYRO AKTİF/3D durumu
 │   │   ├── PowerRingWidget.tsx    ← SRC: HARDWARE_API / DEMO_DEGERLER
 │   │   ├── CyberControlsWidget.tsx← ANİMASYON HIZI (GHz değil), EĞİM KAYNAĞI
@@ -61,7 +61,7 @@ aurasync/
 │   │   ├── NeuralNotes.tsx        ← localStorage notları, rozar = etiket
 │   │   ├── ArchitectHUD.tsx       ← İMZA BEYANI (biyometri görsel animasyondur)
 │   │   ├── MatrixRainOverlay.tsx, MobileTabBar.tsx
-│   ├── hooks/useDeviceSensors.ts  ← batarya + eğim + sayaçlar (293 satır)
+│   ├── hooks/useDeviceSensors.ts  ← batarya + eğim + sayaçlar (298 satır)
 │   ├── services/soundFx.ts        ← Web Audio sentezi + mute kalıcılığı
 │   └── main.tsx, index.css
 ├── public/aurasync-standalone.html← bağımlılıksız tek dosya kopya (751 satır)
@@ -73,20 +73,20 @@ aurasync/
 
 | Arayüzde görünen | Durum | Kaynak (dosya:satır) |
 |---|---|---|
-| Batarya %'si, şarj durumu | Gerçek API; yoksa `DEMO_DEGERLER` yazar | `useDeviceSensors.ts:104` → `nav.getBattery()` |
-| "Dolu Kalan / Bitme Süresi" | Gerçek `chargingTime`/`dischargingTime`; `API VERMEZ` dallı | `PowerRingWidget.tsx:27` → `secondsToLabel()` |
+| Batarya %'si, şarj durumu | Gerçek API; yoksa `DEMO_DEGERLER` yazar | `useDeviceSensors.ts:110` → `nav.getBattery()` |
+| "Dolu Kalan / Bitme Süresi" | Gerçek `chargingTime`/`dischargingTime`; `API VERMEZ` dallı | `PowerRingWidget.tsx:32` → `secondsToLabel()` |
 | Voltage "tahmini", Temp "model" | Etiketli türetme — sensör okuması değil | `PowerRingWidget.tsx` gauge satırları |
-| 3D tilt açısı | Gerçek sensör **veya** imleçten türetilmiş; `source` alanı ayırır | `useDeviceSensors.ts:183` `handleOrientation`, pointer dalı `source: 'pointer'` |
-| Gyro izin akışı | iOS `requestPermission()` gerçek; yoksa `isSupported: false` | `useDeviceSensors.ts:254` `requestGyroPermission()` |
-| Efekt sesleri | Gerçek osilatör + gain ramp | `soundFx.ts:48` `createOscillator()` |
-| RENDER FPS | `requestAnimationFrame` kare sayısından ölçülüyor | `DataStreamCanvas.tsx:40-53` |
+| 3D tilt açısı | Gerçek sensör **veya** imleçten türetilmiş; `source` alanı ayırır | `useDeviceSensors.ts:188` `handleOrientation`, pointer dalı `source: 'pointer'` |
+| Gyro izin akışı | iOS `requestPermission()` gerçek; yoksa `isSupported: false` | `useDeviceSensors.ts:259` `requestGyroPermission()` |
+| Efekt sesleri | Gerçek osilatör + gain ramp | `soundFx.ts:52` `createOscillator()` |
+| RENDER FPS | `requestAnimationFrame` kare sayısından ölçülüyor | `DataStreamCanvas.tsx:45-58` |
 | Throughput / Ping / Loss KPI'ları | Simülasyon; `(sim)` + `DEKOR` etiketli | `DataStreamCanvas.tsx` KPI şeridi |
-| Notlar | Gerçek `localStorage`, **düz metin** | `NeuralNotes.tsx:56`/`:79` `aurasync_neural_notes` |
-| `ENCRYPTED` rozeti | Yalnızca etiket; şifreleme yok | `NeuralNotes.tsx:105` → `:323` |
-| `status` komutu | Gerçek olgular: sürüm, batarya kaynağı, tilt kaynağı, uptime | `TerminalDrawer.tsx:83` |
-| `scan` komutu | **Gerçek** özellik taraması: localStorage yaz/ok, API varlığı, viewport | `TerminalDrawer.tsx:126` |
+| Notlar | Gerçek `localStorage`, **düz metin** | `NeuralNotes.tsx:61`/`:84` `aurasync_neural_notes` |
+| `ENCRYPTED` rozeti | Yalnızca etiket; şifreleme yok | `NeuralNotes.tsx:110` → `:328` |
+| `status` komutu | Gerçek olgular: sürüm, batarya kaynağı, tilt kaynağı, uptime | `TerminalDrawer.tsx:88` |
+| `scan` komutu | **Gerçek** özellik taraması: localStorage yaz/ok, API varlığı, viewport | `TerminalDrawer.tsx:131` |
 | `sync` / `decrypt` / `overclock` | SİMÜLASYON / KURGU / animasyon hızı (GHz iddiası yok) | `TerminalDrawer.tsx` switch dalları |
-| Decoratif "894" jitter | Üst çubukta `DECOR` çipi + tooltip | `useDeviceSensors.ts:69` → `MobileTopBar.tsx` |
+| Decoratif "894" jitter | Üst çubukta `DECOR` çipi + tooltip | `useDeviceSensors.ts:74` → `MobileTopBar.tsx` |
 | Ağ isteği | `fetch`/`WebSocket`/`EventSource` **yok**; yalnızca Google Fonts | tüm `src/` taramasında 0 çağrı |
 
 Kalıcılık anahtarları (4): `aurasync_neural_notes`, `aurasync_audio_muted` (React),
@@ -141,8 +141,10 @@ Tarayıcıda doğrulananlar (Chrome, `vite preview`):
 
 ## 8. Telif ve imza
 
-Tasarım ve kod **Enes Öztürk**'e aittir; katkı hakları (telif) saklıdır. Kaynak dosyalar
-`SPDX-License-Identifier: Apache-2.0` başlığıyla dağıtılır. Arayüzün `about` komutu ve
+Tasarım ve kod **Enes Öztürk**'e aittir; katkı hakları (telif) saklıdır.
+`src/` altındaki 14 dosyanın tamamı (13 TS/TSX + `index.css`) başlığında
+`Copyright 2026 Enes Öztürk` ve `SPDX-License-Identifier: Apache-2.0` taşır;
+depo kökündeki `LICENSE` + `NOTICE` klasörün tamamını kapsar. Arayüzün `about` komutu ve
 mimari HUD'u bu beyanı taşır:
 
 ```

@@ -123,7 +123,7 @@
 
     <rect x="872" y="404" width="200" height="72" rx="12" fill="url(#card)" stroke="#fb7185" stroke-opacity="0.55"/>
     <text x="972" y="434" text-anchor="middle" font-family="Consolas, monospace" font-size="15" font-weight="700" fill="#e2e8f0">resolve_dispute</text>
-    <text x="972" y="456" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fda4af">E_INVALID_SPLIT: toplam == kalan</text>
+    <text x="972" y="456" text-anchor="middle" font-family="Consolas, monospace" font-size="11" fill="#fda4af">toplam == kalan kontrolu</text>
 
     <path d="M800 440H864" stroke="#fb7185" stroke-width="2" marker-end="url(#arrowRose)"/>
 

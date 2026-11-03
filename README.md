@@ -71,6 +71,9 @@ patika-backend-odevleri/
 │   ├── tools/check_inline_html.mjs ← kendi denetleyici: söz dizimi, eksik id, çift id
 │   ├── docs/cover.svg      ← ödevin özel kapağı (elle yazılmış vektör)
 │   └── README.md           ← §5'te veri kaynağı etiketleri, §6'da doğrulama çıktısı
+├── LICENSE                   ← Apache-2.0: apache.org'dan birebir indirilmiş metin (SHA-256 §"İmza ve haklar")
+├── NOTICE                    ← telif beyanı, üçüncü taraf varlıklar, SPDX kapsamı (17/58) ve ölçüm komutu
+├── .gitattributes            ← metin dosyalarında LF standardı: ölçümler platformdan bağımsız kalır
 └── README.md               ← bu dosya (depo kökü indeksi)
 ```
 
@@ -90,15 +93,23 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
 - Her ödevin kapağı `<ödev>/docs/cover.svg` içinde **elle yazılmış vektördür**; jenerik AI
   görseli kullanılmaz. Kapak, o ödevin gerçek sayılarını (dosya/satır/test/adres sayısı) taşır.
 - Kapaktaki her sayı kaynak koddan doğrulanır; sayı değişirse kapak da güncellenir.
-- Depo köküne sosyal önizleme gerekiyorsa Settings → Social preview ile verilir.
+- Her kapağın **1280×640 PNG renderi** `docs/cover.png` olarak depoda durur; SVG'den
+  `@resvg/resvg-js` ile türetilmiştir (araç depoya bağımlılık olarak eklenmez, geçici dizinde
+  kurulur). GitHub **Settings → Social preview** için doğrudan bu dosya yüklenir; SVG değişirse
+  PNG yeniden üretilir.
 
 ## İmza ve haklar
 
 - Depodaki dört çalışmanın **tasarımı ve kodu Enes Öztürk'e aittir**; katkı hakları (telif) saklıdır.
 - Beyan her ödevin içinde de görünür: ödev README'sinin başlığı, `docs/cover.svg` altbilgisi ve
   arayüzün kendi künyesi (AuraSync `about` komutu + Architect HUD, NexusCore altbilgi + `SYSTEM SPECS`).
-- Kaynak dosyalar `SPDX-License-Identifier: Apache-2.0` başlığıyla dağıtılır; depo kök lisans dosyası
-  ayrıca eklenene kadar bu beyan geçerlidir.
+- Kök lisans **`LICENSE`** dosyasıdır: `https://www.apache.org/licenses/LICENSE-2.0.txt` adresinden
+  birebir indirilmiş Apache-2.0 metni (202 satır, 11.358 bayt,
+  SHA-256 `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30`).
+  Atıf ve üçüncü taraf varlık listesi **`NOTICE`** dosyasındadır.
+- Elle yazılmış kaynak dosyaların **17'si** (toplam 58) başlığında `SPDX-License-Identifier: Apache-2.0`
+  beyanını taşır; beyanı olmayan dosyalar da `LICENSE` + `NOTICE` ile aynı lisansa tabiidir.
+  Bu iki sayı `NOTICE` içindeki komutla yeniden ölçülebilir.
 - Üçüncü taraf varlıklar kaynak gösterilir: Google Fonts yazı tipleri, React 19 / Vite 8 / Tailwind 4 /
   lucide-react, Aptos Framework (Move). Bu depoda **başkasına ait kod "benim" diye sunulmaz**;
   simülasyon olan hiçbir şey "gerçek ölçüm" diye de sunulmaz.
@@ -111,5 +122,8 @@ Her ödev klasörünün kendi `README.md`'si üç şeyi birlikte verir:
 - Bu depo, aynı yazarın [patika-dev-odevler](https://github.com/EnesBinMalik/patika-dev-odevler)
   arşivinin **backend** tarafını toplar; arşiv çatısının tamamı orada, 63 proje klasörünün
   haritası da oranın kök README'sindedir.
-- Lisans: kaynak dosyaların başlığında `SPDX-License-Identifier: Apache-2.0` beyanı var; depo
-  kök lisansı henüz eklenmedi.
+- Lisans: kökte `LICENSE` (Apache-2.0, birebir) ve `NOTICE` (telif + üçüncü taraf varlıklar).
+  Kaynak dosyaların 17/58'inde ayrıca `SPDX-License-Identifier: Apache-2.0` başlığı var.
+- `.gitattributes` tüm metin dosyalarını depoda ve checkout'ta **LF** ile tutar; böylece
+  README'lerdeki karakter/satır ölçümleri Windows klonunda da aynı kalır
+  (`core.autocrlf=true` iken bile).

@@ -1,6 +1,10 @@
 /**
  * Cyberpunk Audio Synthesizer via Web Audio API
  * Generates futuristic UI clicks, chimes, chirps, and alarms without external audio files.
+ *
+ * @license
+ * Copyright 2026 Enes Öztürk — tüm hakları saklıdır
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 class SoundFxService {
