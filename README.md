@@ -2,7 +2,7 @@
 
 # Patika Backend Ödevleri
 
-<img src="docs/repo-cover.svg" width="1200" alt="Depo kapağı: 100 izlenen dosya, 1365 satır Move, 8 Move testi, 17/58 SPDX başlığı; dört ödevin kendi kapak sayılarıyla kartları, lisans ve düzen notu" />
+<img src="docs/repo-cover.svg" width="1200" alt="Depo kapağı: 102 izlenen dosya, 1365 satır Move, 8 Move testi, 17/58 SPDX başlığı; dört ödevin kendi kapak sayılarıyla kartları, lisans ve düzen notu" />
 
 [Patika](https://patika.dev) backend yolculuğundaki ödev ve projelerin **depo kökü**.
 Her ödev kendi klasöründe; blokzincir, GraphQL, Node ve mimari refaktör işleri — artık arayüz
