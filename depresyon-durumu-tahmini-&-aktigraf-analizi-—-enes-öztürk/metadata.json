@@ -1,0 +1,6 @@
+{
+  "name": "Depresyon Durumu Tahmini & Aktigraf Analizi — Enes Öztürk",
+  "description": "Kaggle The Depression Dataset aktigraf ve klinik verileri ile makine öğrenmesi tabanlı depresyon durumu tahmini, veri ön işleme, outlier analizi, model kıyaslaması ve interaktif tanı testi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
