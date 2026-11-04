@@ -1,0 +1,6 @@
+{
+  "name": "Enes Öztürk - Veri Bilimi & ML Capstone Projesi",
+  "description": "Enes Öztürk imzalı kapsamlı uçtan uca Makine Öğrenmesi projesi: Keşifçi veri analizi (EDA), eksik/kategorik değişken mühendisliği, outlier eliminasyonu, RMSLE/RMSE hata metrikleri, çoklu model eğitimi ve GitHub reposu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
